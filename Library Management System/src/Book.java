@@ -5,12 +5,12 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class Student extends javax.swing.JFrame {
+public class Book extends javax.swing.JFrame {
 
-    public Student() {
+    public Book() {
         initComponents();
 //        Connect();
-//        StudentData();
+//        BookData();
     }
     
     Connection con;
@@ -22,17 +22,17 @@ public class Student extends javax.swing.JFrame {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/librarydb","root","");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Book.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Book.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    private void StudentData(){
-        
+    private void BookData(){
+    
         try {
             int QQ;
-            pst = con.prepareStatement("SELECT * FROM student");
+            pst = con.prepareStatement("SELECT * FROM book");
             ResultSet Rs = pst.executeQuery();
             
             ResultSetMetaData RSMD = Rs.getMetaData();
@@ -46,19 +46,18 @@ public class Student extends javax.swing.JFrame {
             while(Rs.next()){
         
                 Vector v2 = new Vector();
-
-                for(int aa=1; aa<=QQ; aa++){
-
-                    v2.add(Rs.getString("studentid"));
-                    v2.add(Rs.getString("studentname"));
-                    v2.add(Rs.getString("email"));
-                    v2.add(Rs.getString("address"));
+             
+                for(int aa=1; aa<=QQ; aa++){                
+                    v2.add(Rs.getString("bookid"));
+                    v2.add(Rs.getString("bookname"));
+                    v2.add(Rs.getString("author"));
+                    v2.add(Rs.getString("publisher"));
                 }
-
-                DFG.addRow(v2);
+                
+                DFG.addRow(v2);        
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Book.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -77,10 +76,10 @@ public class Student extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtID = new javax.swing.JTextField();
-        txtName = new javax.swing.JTextField();
-        txtEmail = new javax.swing.JTextField();
-        txtAddress = new javax.swing.JTextField();
+        txtBookID = new javax.swing.JTextField();
+        txtBookName = new javax.swing.JTextField();
+        txtAuthor = new javax.swing.JTextField();
+        txtPublisher = new javax.swing.JTextField();
         btnInsert = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
@@ -96,14 +95,14 @@ public class Student extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Student");
+        jLabel1.setText("Book");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(277, 277, 277)
+                .addGap(261, 261, 261)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -120,33 +119,34 @@ public class Student extends javax.swing.JFrame {
 
             },
             new String [] {
-                "StudentID", "StudentName", "Email", "Address"
+                "BookID", "BookName", "Author", "Publisher"
             }
         ));
         jScrollPane1.setViewportView(table1);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("StudentID");
+        jLabel2.setText("BookID");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("StudentName");
+        jLabel3.setText("BookName");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setText("Email");
+        jLabel4.setText("Author");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setText("Address");
+        jLabel5.setText("Publisher");
 
-        txtID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtBookID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        txtName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtBookName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtAuthor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        txtAddress.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtPublisher.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         btnInsert.setBackground(new java.awt.Color(255, 255, 51));
         btnInsert.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnInsert.setForeground(new java.awt.Color(0, 0, 0));
         btnInsert.setText("Insert");
         btnInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,6 +156,7 @@ public class Student extends javax.swing.JFrame {
 
         btnUpdate.setBackground(new java.awt.Color(255, 255, 51));
         btnUpdate.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnUpdate.setForeground(new java.awt.Color(0, 0, 0));
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,6 +166,7 @@ public class Student extends javax.swing.JFrame {
 
         btnDelete.setBackground(new java.awt.Color(255, 255, 51));
         btnDelete.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(0, 0, 0));
         btnDelete.setText("Delete");
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sach.jpg"))); // NOI18N
@@ -188,23 +190,21 @@ public class Student extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtName)
-                            .addComponent(txtAddress)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtBookID)
+                            .addComponent(txtBookName)
+                            .addComponent(txtAuthor)
+                            .addComponent(txtPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnInsert)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnUpdate)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnDelete)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(295, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,29 +214,30 @@ public class Student extends javax.swing.JFrame {
                         .addGap(45, 45, 45)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtBookID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtBookName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(30, 30, 30)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel6)))
-                .addGap(18, 18, 18)
+                            .addComponent(txtPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6)
+                        .addGap(6, 6, 6)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInsert)
                     .addComponent(btnUpdate)
                     .addComponent(btnDelete))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -244,10 +245,7 @@ public class Student extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 673, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,62 +258,62 @@ public class Student extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         try {
-            String studentid = txtID.getText();
-            String studentname = txtName.getText();
-            String email = txtEmail.getText();
-            String address = txtAddress.getText();
+            String bookid = txtBookID.getText();
+            String bookname = txtBookName.getText();
+            String author = txtAuthor.getText();
+            String publisher = txtPublisher.getText();
             
-            pst = con.prepareStatement("INSERT INTO student (studentid,studentname,email,address)VALUES(?,?,?,?)");
+            pst = con.prepareStatement("INSERT INTO book (bookid,bookname,author,publisher)VALUES(?,?,?,?)");
             
-            pst.setString(1,studentid);
-            pst.setString(2,studentname);
-            pst.setString(3,email);
-            pst.setString(4,address);
+            pst.setString(1,bookid);
+            pst.setString(2,bookname);
+            pst.setString(3,author);
+            pst.setString(4,publisher);
             
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Inserted Successfully");
-            StudentData();
+            BookData();
         } catch (SQLException ex) {
-            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Book.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         try {
-            String studentid = txtID.getText();
-            String studentname = txtName.getText();
-            String email = txtEmail.getText();
-            String address = txtAddress.getText();
+            String bookid = txtBookID.getText();
+            String bookname = txtBookName.getText();
+            String author = txtAuthor.getText();
+            String publisher = txtPublisher.getText();
             
-            pst = con.prepareStatement("update student set studentname= ?,email= ?,address= ? where studentid= ?");
+            pst = con.prepareStatement("update student set bookname= ?,author= ?,publisher= ? where bookid= ?");
                       
-            pst.setString(1,studentname);
-            pst.setString(2,email);
-            pst.setString(3,address);
-            pst.setString(4,studentid);
+            pst.setString(1,bookname);
+            pst.setString(2,author);
+            pst.setString(3,publisher);
+            pst.setString(4,bookid);
             
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Updated Successfully");
-            StudentData();
+            BookData();
         } catch (SQLException ex) {
-            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Book.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
     
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {
-      
-        try {
-            String studentid = txtID.getText();
-            pst=con.prepareStatement("DELETE FROM student WHERE studentid=?");
-            pst.setString(1,studentid);
+       try {
+            String bookid = txtBookID.getText();
+            pst=con.prepareStatement("DELETE FROM student WHERE bookid=?");
+            pst.setString(1,bookid);
             
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Deleted Successfully");
-            StudentData();           
+            BookData();           
         } catch (SQLException ex) {
-            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Book.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -346,7 +344,7 @@ public class Student extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Student().setVisible(true);
+                new Book().setVisible(true);
             }
         });
     }
@@ -367,9 +365,9 @@ public class Student extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTable table1;
-    private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtID;
-    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtAuthor;
+    private javax.swing.JTextField txtBookID;
+    private javax.swing.JTextField txtBookName;
+    private javax.swing.JTextField txtPublisher;
     // End of variables declaration//GEN-END:variables
 }
