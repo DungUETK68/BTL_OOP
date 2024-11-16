@@ -10,18 +10,17 @@ public class Borrow extends javax.swing.JFrame {
 
     public Borrow() {
         initComponents();
-//        Connect();
-//        BorrowData();
+        Connect();
+        BorrowData();
     }
     
     Connection con;
     PreparedStatement pst;
     
-    public void Connect(){
-    
+    public void Connect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/librarydb","root","");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/library", "root", "");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -29,8 +28,7 @@ public class Borrow extends javax.swing.JFrame {
         }
     }
     
-    private void BorrowData(){
-        
+    private void BorrowData() {
         try {
             int QQ;
             pst = con.prepareStatement("SELECT * FROM borrow");
@@ -50,12 +48,12 @@ public class Borrow extends javax.swing.JFrame {
 
                 for(int aa=1; aa<=QQ; aa++){
 
-                    v2.add(Rs.getString("studentid"));
+                    v2.add(Rs.getString("bookid"));
                     v2.add(Rs.getString("studentname"));
-                    v2.add(Rs.getString("email"));
-                    v2.add(Rs.getString("address"));
+                    v2.add(Rs.getString("book"));
+                    v2.add(Rs.getString("date_borrow"));
+                    v2.add(Rs.getString("date_return"));
                 }
-
                 DFG.addRow(v2);
             }
         } catch (SQLException ex) {
@@ -79,7 +77,7 @@ public class Borrow extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtBid = new javax.swing.JTextField();
+        txtBookid = new javax.swing.JTextField();
         txtBStudentName = new javax.swing.JTextField();
         txtBook = new javax.swing.JTextField();
         btnInsert = new javax.swing.JButton();
@@ -131,6 +129,7 @@ public class Borrow extends javax.swing.JFrame {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
+        table1.setBackground(new java.awt.Color(255, 255, 255));
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -139,7 +138,10 @@ public class Borrow extends javax.swing.JFrame {
                 "BId", "StudentName", "Book", "Date_Borrowed", "Date_Return"
             }
         ));
+        table1.setRowHeight(30);
         jScrollPane1.setViewportView(table1);
+
+        jPanel2.setBackground(new java.awt.Color(204, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Mã sách");
@@ -153,7 +155,7 @@ public class Borrow extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("Ngày mượn");
 
-        txtBid.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtBookid.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         txtBStudentName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -161,6 +163,7 @@ public class Borrow extends javax.swing.JFrame {
 
         btnInsert.setBackground(new java.awt.Color(0, 153, 255));
         btnInsert.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnInsert.setForeground(new java.awt.Color(255, 255, 255));
         btnInsert.setText("Insert");
         btnInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,6 +173,7 @@ public class Borrow extends javax.swing.JFrame {
 
         btnUpdate.setBackground(new java.awt.Color(0, 153, 255));
         btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,6 +183,7 @@ public class Borrow extends javax.swing.JFrame {
 
         btnDelete.setBackground(new java.awt.Color(0, 153, 255));
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,7 +194,7 @@ public class Borrow extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setText("Ngày trả");
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sach.jpg"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/book.jpg"))); // NOI18N
         jLabel7.setText("jLabel7");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -197,7 +202,7 @@ public class Borrow extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addGap(70, 70, 70)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -223,7 +228,7 @@ public class Borrow extends javax.swing.JFrame {
                                     .addComponent(DateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(DateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtBStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtBid, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtBookid, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(22, 22, 22))))))
@@ -236,7 +241,7 @@ public class Borrow extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(txtBid, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtBookid, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -274,8 +279,8 @@ public class Borrow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -294,24 +299,23 @@ public class Borrow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         try {
-            String bid = txtBid.getText();
+            String bookid = txtBookid.getText();
             String studentname = txtBStudentName.getText();
             String book = txtBook.getText();
-           
+
+            pst = con.prepareStatement("INSERT INTO borrow (bookid, studentname, book, date_borrow, date_return)VALUES(?, ?, ?, ?, ?)");
             
-            pst = con.prepareStatement("INSERT INTO borrow (bid,studentname,book,date_borrowed,date_return)VALUES(?,?,?,?,?)");
-            
-            pst.setString(1,bid);
-            pst.setString(2,studentname);
-            pst.setString(3,book);
+            pst.setString(1, bookid);
+            pst.setString(2, studentname);
+            pst.setString(3, book);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String date_borrowed = sdf.format(DateChooser1.getDate());
+            String date_borrow = sdf.format(DateChooser1.getDate());
             String date_return = sdf.format(DateChooser2.getDate());
-            pst.setString(4, date_borrowed);
+            pst.setString(4, date_borrow);
             pst.setString(5, date_return);
             
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Record Inserted Successfully");
+            JOptionPane.showMessageDialog(this, "Thêm thông tin mượn sách thành công!");
             BorrowData();
         } catch (SQLException ex) {
             Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
@@ -320,22 +324,22 @@ public class Borrow extends javax.swing.JFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         try {
-            String bid = txtBid.getText();
+            String bookid = txtBookid.getText();
             String studentname = txtBStudentName.getText();
             String book = txtBook.getText();
                         
-            pst = con.prepareStatement("update borrow set studentname= ?,book= ?,date_borrowed= ?, date_return= ? where bid= ?");
+            pst = con.prepareStatement("update borrow set studentname= ?, book= ?, date_borrow= ?, date_return= ? where bookid= ?");
                       
-            pst.setString(1,studentname);
-            pst.setString(2,book);
-            pst.setString(5,bid);
+            pst.setString(1, studentname);
+            pst.setString(2, book);
+            pst.setString(5, bookid);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String date_borrowed = sdf.format(DateChooser1.getDate());
             String date_return = sdf.format(DateChooser2.getDate());
             pst.setString(3, date_borrowed);
             pst.setString(4, date_return);
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Record Updated Successfully");
+            JOptionPane.showMessageDialog(this, "Update thông tin mượn sách thành công");
             BorrowData();
         } catch (SQLException ex) {
             Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
@@ -343,14 +347,13 @@ public class Borrow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
         try {
-            String bid = txtBid.getText();
-            pst=con.prepareStatement("DELETE FROM borrow WHERE bid=?");
-            pst.setString(1,bid);
+            String bookid = txtBookid.getText();
+            pst = con.prepareStatement("DELETE FROM borrow WHERE bookid=?");
+            pst.setString(1, bookid);
             
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Record Deleted Successfully");
+            JOptionPane.showMessageDialog(this, "Xóa thông tin mượn sách thành công");
             BorrowData();           
         } catch (SQLException ex) {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
@@ -415,7 +418,7 @@ public class Borrow extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTable table1;
     private javax.swing.JTextField txtBStudentName;
-    private javax.swing.JTextField txtBid;
     private javax.swing.JTextField txtBook;
+    private javax.swing.JTextField txtBookid;
     // End of variables declaration//GEN-END:variables
 }

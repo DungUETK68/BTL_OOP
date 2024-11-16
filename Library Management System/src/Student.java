@@ -17,7 +17,6 @@ public class Student extends javax.swing.JFrame {
     PreparedStatement pst;
     
     public void Connect(){
-    
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/library", "root", "");
@@ -29,7 +28,6 @@ public class Student extends javax.swing.JFrame {
     }
     
     private void StudentData(){
-        
         try {
             int QQ;
             pst = con.prepareStatement("SELECT * FROM student");
@@ -47,14 +45,12 @@ public class Student extends javax.swing.JFrame {
         
                 Vector v2 = new Vector();
 
-                for(int aa=1; aa<=QQ; aa++){
-
+                for (int aa = 1; aa <= QQ; aa++) {
                     v2.add(Rs.getString("studentid"));
                     v2.add(Rs.getString("studentname"));
                     v2.add(Rs.getString("email"));
                     v2.add(Rs.getString("address"));
                 }
-
                 DFG.addRow(v2);
             }
         } catch (SQLException ex) {
@@ -128,6 +124,9 @@ public class Student extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(204, 255, 255));
+        jPanel2.setForeground(new java.awt.Color(204, 255, 255));
+
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Mã sinh viên");
 
@@ -150,6 +149,7 @@ public class Student extends javax.swing.JFrame {
 
         btnInsert.setBackground(new java.awt.Color(0, 153, 255));
         btnInsert.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnInsert.setForeground(new java.awt.Color(255, 255, 255));
         btnInsert.setText("Insert");
         btnInsert.setPreferredSize(new java.awt.Dimension(90, 45));
         btnInsert.addActionListener(new java.awt.event.ActionListener() {
@@ -160,6 +160,7 @@ public class Student extends javax.swing.JFrame {
 
         btnUpdate.setBackground(new java.awt.Color(0, 153, 255));
         btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setText("Update");
         btnUpdate.setPreferredSize(new java.awt.Dimension(90, 45));
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -170,11 +171,13 @@ public class Student extends javax.swing.JFrame {
 
         btnDelete.setBackground(new java.awt.Color(0, 153, 255));
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Delete");
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/student.jpg"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/person.jpg"))); // NOI18N
         jLabel6.setText("jLabel6");
 
+        table1.setBackground(new java.awt.Color(255, 255, 255));
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -183,6 +186,7 @@ public class Student extends javax.swing.JFrame {
                 "StudentID", "StudentName", "Email", "Address"
             }
         ));
+        table1.setRowHeight(30);
         jScrollPane1.setViewportView(table1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -190,7 +194,7 @@ public class Student extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(87, 87, 87)
+                .addGap(72, 72, 72)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -206,7 +210,7 @@ public class Student extends javax.swing.JFrame {
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 81, Short.MAX_VALUE))
+                                .addGap(0, 96, Short.MAX_VALUE))
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,15 +286,15 @@ public class Student extends javax.swing.JFrame {
             String email = txtEmail.getText();
             String address = txtAddress.getText();
             
-            pst = con.prepareStatement("INSERT INTO student (studentid,studentname,email,address)VALUES(?,?,?,?)");
+            pst = con.prepareStatement("INSERT INTO student (studentid, studentname, email, address)VALUES(?, ?, ?, ?)");
             
-            pst.setString(1,studentid);
-            pst.setString(2,studentname);
-            pst.setString(3,email);
-            pst.setString(4,address);
+            pst.setString(1, studentid);
+            pst.setString(2, studentname);
+            pst.setString(3, email);
+            pst.setString(4, address);
             
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Record Inserted Successfully");
+            JOptionPane.showMessageDialog(this, "Thêm thông tin sinh viên thành công!");
             StudentData();
         } catch (SQLException ex) {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
@@ -304,15 +308,15 @@ public class Student extends javax.swing.JFrame {
             String email = txtEmail.getText();
             String address = txtAddress.getText();
             
-            pst = con.prepareStatement("update student set studentname= ?,email= ?,address= ? where studentid= ?");
+            pst = con.prepareStatement("update student set studentname=?, email=?, address=? where studentid=?");
                       
-            pst.setString(1,studentname);
-            pst.setString(2,email);
-            pst.setString(3,address);
-            pst.setString(4,studentid);
+            pst.setString(1, studentname);
+            pst.setString(2, email);
+            pst.setString(3, address);
+            pst.setString(4, studentid);
             
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Record Updated Successfully");
+            JOptionPane.showMessageDialog(this, "Update thông tin thành công!");
             StudentData();
         } catch (SQLException ex) {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
@@ -328,10 +332,10 @@ public class Student extends javax.swing.JFrame {
         try {
             String studentid = txtID.getText();
             pst=con.prepareStatement("DELETE FROM student WHERE studentid=?");
-            pst.setString(1,studentid);
+            pst.setString(1, studentid);
             
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Record Deleted Successfully");
+            JOptionPane.showMessageDialog(this, "Xóa thông tin sinh viên thành công!");
             StudentData();           
         } catch (SQLException ex) {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);

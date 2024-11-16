@@ -9,18 +9,17 @@ public class Book extends javax.swing.JFrame {
 
     public Book() {
         initComponents();
-//        Connect();
-//        BookData();
+        Connect();
+        BookData();
     }
     
     Connection con;
     PreparedStatement pst;
     
     public void Connect(){
-    
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/librarydb","root","");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/library", "root", "");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Book.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -29,7 +28,6 @@ public class Book extends javax.swing.JFrame {
     }
     
     private void BookData(){
-    
         try {
             int QQ;
             pst = con.prepareStatement("SELECT * FROM book");
@@ -53,8 +51,7 @@ public class Book extends javax.swing.JFrame {
                     v2.add(Rs.getString("author"));
                     v2.add(Rs.getString("publisher"));
                 }
-                
-                DFG.addRow(v2);        
+                DFG.addRow(v2);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Book.class.getName()).log(Level.SEVERE, null, ex);
@@ -127,6 +124,9 @@ public class Book extends javax.swing.JFrame {
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(204, 255, 255));
+
+        table1.setBackground(new java.awt.Color(255, 255, 255));
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -135,6 +135,7 @@ public class Book extends javax.swing.JFrame {
                 "BookID", "BookName", "Author", "Publisher"
             }
         ));
+        table1.setRowHeight(30);
         jScrollPane1.setViewportView(table1);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -182,7 +183,7 @@ public class Book extends javax.swing.JFrame {
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Delete");
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sach.jpg"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/book.jpg"))); // NOI18N
         jLabel6.setText("jLabel6");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -281,15 +282,15 @@ public class Book extends javax.swing.JFrame {
             String author = txtAuthor.getText();
             String publisher = txtPublisher.getText();
             
-            pst = con.prepareStatement("INSERT INTO book (bookid,bookname,author,publisher)VALUES(?,?,?,?)");
+            pst = con.prepareStatement("INSERT INTO book (bookid, bookname, author, publisher)VALUES(?, ?, ?, ?)");
             
-            pst.setString(1,bookid);
-            pst.setString(2,bookname);
-            pst.setString(3,author);
-            pst.setString(4,publisher);
+            pst.setString(1, bookid);
+            pst.setString(2, bookname);
+            pst.setString(3, author);
+            pst.setString(4, publisher);
             
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Record Inserted Successfully");
+            JOptionPane.showMessageDialog(this, "Thêm thông tin sách thành công!");
             BookData();
         } catch (SQLException ex) {
             Logger.getLogger(Book.class.getName()).log(Level.SEVERE, null, ex);
@@ -303,15 +304,15 @@ public class Book extends javax.swing.JFrame {
             String author = txtAuthor.getText();
             String publisher = txtPublisher.getText();
             
-            pst = con.prepareStatement("update student set bookname= ?,author= ?,publisher= ? where bookid= ?");
+            pst = con.prepareStatement("update book set bookname= ?, author= ?, publisher= ? where bookid= ?");
                       
-            pst.setString(1,bookname);
-            pst.setString(2,author);
-            pst.setString(3,publisher);
-            pst.setString(4,bookid);
+            pst.setString(1, bookname);
+            pst.setString(2, author);
+            pst.setString(3, publisher);
+            pst.setString(4, bookid);
             
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Record Updated Successfully");
+            JOptionPane.showMessageDialog(this, "Update thông tin sách thành công!");
             BookData();
         } catch (SQLException ex) {
             Logger.getLogger(Book.class.getName()).log(Level.SEVERE, null, ex);
@@ -325,11 +326,12 @@ public class Book extends javax.swing.JFrame {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {
        try {
             String bookid = txtBookID.getText();
-            pst=con.prepareStatement("DELETE FROM student WHERE bookid=?");
-            pst.setString(1,bookid);
+            pst = con.prepareStatement("DELETE FROM book WHERE bookid=?");
+           pst.setString(1, bookid);
             
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Record Deleted Successfully");
+
+           JOptionPane.showMessageDialog(this, "Xóa thông tin sách thành công!");
             BookData();           
         } catch (SQLException ex) {
             Logger.getLogger(Book.class.getName()).log(Level.SEVERE, null, ex);
