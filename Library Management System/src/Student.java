@@ -9,8 +9,8 @@ public class Student extends javax.swing.JFrame {
 
     public Student() {
         initComponents();
-//        Connect();
-//        StudentData();
+        Connect();
+        StudentData();
     }
     
     Connection con;
@@ -20,7 +20,7 @@ public class Student extends javax.swing.JFrame {
     
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/librarydb","root","");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/library", "root", "");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
