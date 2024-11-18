@@ -356,7 +356,7 @@ public class Borrow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Xóa thông tin mượn sách thành công");
             BorrowData();           
         } catch (SQLException ex) {
-            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 

@@ -330,7 +330,7 @@ public class Book extends javax.swing.JFrame {
             pst.setString(1, bookid);
             
             pst.executeUpdate();
-           JOptionPane.showMessageDialog(this, "Xóa thông tin sách thành công!");
+            JOptionPane.showMessageDialog(this, "Xóa thông tin sách thành công!");
             BookData();           
         } catch (SQLException ex) {
             Logger.getLogger(Book.class.getName()).log(Level.SEVERE, null, ex);
