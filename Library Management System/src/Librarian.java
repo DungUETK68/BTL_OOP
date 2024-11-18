@@ -297,7 +297,7 @@ public class Librarian extends javax.swing.JFrame {
             
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Thêm thông tin thủ thư thành công");
-	    LibrarianData();
+            LibrarianData();
         } catch (SQLException ex) {
             Logger.getLogger(Librarian.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -334,10 +334,9 @@ public class Librarian extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
     
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {
-      
         try {
             String librarianid = txtLId.getText();
-            pst = con.prepareStatement("DELETE FROM student WHERE librarianid=?");
+            pst = con.prepareStatement("DELETE FROM librarian WHERE librarianid=?");
             pst.setString(1, librarianid);
             
             pst.executeUpdate();

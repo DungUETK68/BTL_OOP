@@ -33,7 +33,7 @@ public class Borrow extends javax.swing.JFrame {
             int QQ;
             pst = con.prepareStatement("SELECT * FROM borrow");
             ResultSet Rs = pst.executeQuery();
-            
+
             ResultSetMetaData RSMD = Rs.getMetaData();
 
             QQ = RSMD.getColumnCount();

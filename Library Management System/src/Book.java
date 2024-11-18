@@ -327,10 +327,9 @@ public class Book extends javax.swing.JFrame {
        try {
             String bookid = txtBookID.getText();
             pst = con.prepareStatement("DELETE FROM book WHERE bookid=?");
-           pst.setString(1, bookid);
+            pst.setString(1, bookid);
             
             pst.executeUpdate();
-
            JOptionPane.showMessageDialog(this, "Xóa thông tin sách thành công!");
             BookData();           
         } catch (SQLException ex) {

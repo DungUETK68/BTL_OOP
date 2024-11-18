@@ -143,7 +143,7 @@ public class Login extends javax.swing.JFrame {
         if (user.equals("admin") && pass.equals("admin")) {
             new Main().setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(null, "Username hoặc Password không đúng!");
+            JOptionPane.showMessageDialog(null, "Tài khoản hoặc Mật khẩu không đúng!");
         }
     }//GEN-LAST:event_buttonLoginActionPerformed
 
@@ -171,7 +171,6 @@ public class Login extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);
