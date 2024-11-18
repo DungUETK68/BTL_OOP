@@ -1,11 +1,18 @@
 Library Management System
 
-Các chức năng chính:
+Các màn hình điều khiển:
 1. Đăng nhập
+   - Tài khoản đăng nhập mặc định là (admin, admin)
 
 ![image](https://github.com/user-attachments/assets/5fcb85ed-16af-4018-bc8e-d4f1404b6235)
 
 2. Màn hìnhh chính
+   - Bao gồm 5 button với các chức năng:
+     + Tùy chỉnh thông tin sinh viên
+     + Tùy chỉnh thông tin sách
+     + Tùy chỉnh thông tin mượn sách
+     + Tùy chỉnh thông tin thủ thư
+     + Đăng xuất
 
 ![image](https://github.com/user-attachments/assets/5ff4b1ef-1018-4498-8861-14b0cb930a56)
 
