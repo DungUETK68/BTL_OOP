@@ -131,7 +131,7 @@ public class Librarian extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Lid", "Name", "Email", "Address"
+                "LibrarianID", "LibrarianName", "Email", "Address"
             }
         ));
         table1.setRowHeight(30);
