@@ -10,13 +10,16 @@ Các màn hình điều khiển:
    - Bao gồm 5 button với các chức năng:
      + Tùy chỉnh thông tin sinh viên
      + Tùy chỉnh thông tin sách
-     + Tùy chỉnh thông tin mượn sách
+     + Tùy chỉnh thông tin mượn sách / trả sách
      + Tùy chỉnh thông tin thủ thư
      + Đăng xuất
 
 ![image](https://github.com/user-attachments/assets/5ff4b1ef-1018-4498-8861-14b0cb930a56)
 
 3. Tùy chỉnh sinh viên
+   - Nhập các thông tin: mã sinh viên, họ tên, email, địa chỉ
+   - Button thêm, sửa, xóa
+   - Bảng hiển thị danh sách các cuốn sách còn lại
 
 ![image](https://github.com/user-attachments/assets/b786d629-dc96-44b1-b925-a4140448bc83)
 
