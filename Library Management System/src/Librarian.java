@@ -186,6 +186,11 @@ public class Librarian extends javax.swing.JFrame {
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/person.jpg"))); // NOI18N
         jLabel6.setText("jLabel6");
@@ -310,7 +315,7 @@ public class Librarian extends javax.swing.JFrame {
             String email = txtLEmail.getText();
             String address = txtLAddress.getText();
             
-            pst = con.prepareStatement("update librarian set name= ?, email= ?, address= ? where librarianid= ?");
+            pst = con.prepareStatement("UPDATE librarian SET name= ?, email= ?, address= ? where librarianid= ?");
                       
             pst.setString(1, name);
             pst.setString(2, email);
@@ -332,21 +337,21 @@ public class Librarian extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-    
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         try {
             String librarianid = txtLId.getText();
             pst = con.prepareStatement("DELETE FROM librarian WHERE librarianid=?");
             pst.setString(1, librarianid);
-            
+
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Xóa thông tin thủ thư thành công");
             LibrarianData();
         } catch (SQLException ex) {
             Logger.getLogger(Librarian.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

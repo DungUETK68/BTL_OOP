@@ -328,7 +328,7 @@ public class Borrow extends javax.swing.JFrame {
             String studentname = txtBStudentName.getText();
             String book = txtBook.getText();
                         
-            pst = con.prepareStatement("update borrow set studentname= ?, book= ?, date_borrow= ?, date_return= ? where bookid= ?");
+            pst = con.prepareStatement("UPDATE borrow SET studentname= ?, book= ?, date_borrow= ?, date_return= ? where bookid= ?");
                       
             pst.setString(1, studentname);
             pst.setString(2, book);

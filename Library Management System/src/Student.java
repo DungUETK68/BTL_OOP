@@ -173,11 +173,18 @@ public class Student extends javax.swing.JFrame {
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/person.jpg"))); // NOI18N
         jLabel6.setText("jLabel6");
 
+        table1.setAutoCreateRowSorter(true);
         table1.setBackground(new java.awt.Color(255, 255, 255));
+        table1.setForeground(new java.awt.Color(0, 0, 0));
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -187,6 +194,8 @@ public class Student extends javax.swing.JFrame {
             }
         ));
         table1.setRowHeight(30);
+        table1.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        table1.setShowGrid(false);
         jScrollPane1.setViewportView(table1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -308,7 +317,7 @@ public class Student extends javax.swing.JFrame {
             String email = txtEmail.getText();
             String address = txtAddress.getText();
             
-            pst = con.prepareStatement("update student set studentname=?, email=?, address=? where studentid=?");
+            pst = con.prepareStatement("UPDATE student SET studentname=?, email=?, address=? where studentid=?");
                       
             pst.setString(1, studentname);
             pst.setString(2, email);
@@ -326,22 +335,21 @@ public class Student extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-    
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {
-      
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         try {
             String studentid = txtID.getText();
             pst=con.prepareStatement("DELETE FROM student WHERE studentid=?");
             pst.setString(1, studentid);
-            
+
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Xóa thông tin sinh viên thành công!");
-            StudentData();           
+            StudentData();
         } catch (SQLException ex) {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
