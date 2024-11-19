@@ -19,18 +19,30 @@ Các màn hình điều khiển:
 3. Tùy chỉnh sinh viên
    - Nhập các thông tin: mã sinh viên, họ tên, email, địa chỉ
    - Button thêm, sửa, xóa
-   - Bảng hiển thị danh sách các cuốn sách còn lại
+   - Bảng hiển thị danh sách sinh viên
 
-![image](https://github.com/user-attachments/assets/b786d629-dc96-44b1-b925-a4140448bc83)
+![image](https://github.com/user-attachments/assets/1d58d8bd-d802-47b3-8fc6-6d9a3285f836)
 
 4. Tùy chỉnh sách
+   - Nhập các thông tin: mã sách, tên sách, tác giả, nhà xuất bản
+   - Button thêm, sửa, xóa
+   - Bảng hiển thị danh sách các cuốn sách còn lại
 
-![image](https://github.com/user-attachments/assets/1de87f34-302e-49ce-81eb-dbe72ecbc3b0)
+![image](https://github.com/user-attachments/assets/4ac79ec1-5509-45a1-a159-71dec113f29a)
+
 
 5. Mượn sách
+   - Nhập các thông tin: mã sách, mã sinh viên, ngày mượn, ngày trả
+   - Button thêm, sửa, trả sách
+   - Bảng hiển thị danh sách các cuốn sách đang được mượn
 
-![image](https://github.com/user-attachments/assets/defeae41-2475-4472-a035-f45785a042a2)
+![image](https://github.com/user-attachments/assets/a42171f9-c5ed-4414-81d6-8bce875b443b)
+
 
 6. Tùy chỉnh thủ thư
+   - Nhập các thông tin: mã thủ thư, họ tên, email, địa chỉ
+   - Button thêm, sửa, xóa
+   - Bảng hiển thị danh sách thủ thư
 
-![image](https://github.com/user-attachments/assets/2ca12d33-89d8-4e9a-986a-d3f971a8b456)
+![image](https://github.com/user-attachments/assets/65d40025-7d47-4b22-80e5-641038b13cba)
+
