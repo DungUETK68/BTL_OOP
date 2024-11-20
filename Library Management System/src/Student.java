@@ -6,15 +6,14 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Student extends javax.swing.JFrame {
+    private Connection con;
+    private PreparedStatement pst;
 
     public Student() {
         initComponents();
         Connect();
         StudentData();
     }
-    
-    Connection con;
-    PreparedStatement pst;
     
     public void Connect(){
         try {
@@ -39,8 +38,7 @@ public class Student extends javax.swing.JFrame {
             
             DFG.setRowCount(0);
              
-            while(Rs.next()){
-        
+            while (Rs.next()) {
                 Vector v2 = new Vector();
 
                 for (int aa = 1; aa <= QQ; aa++) {

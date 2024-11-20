@@ -6,16 +6,15 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Librarian extends javax.swing.JFrame {
+    private Connection con;
+    private PreparedStatement pst;
 
     public Librarian() {
         initComponents();
         Connect();
         LibrarianData();
     }
-    
-    Connection con;
-    PreparedStatement pst;
-    
+
     public void Connect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

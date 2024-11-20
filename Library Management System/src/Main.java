@@ -1,6 +1,5 @@
 
 public class Main extends javax.swing.JFrame {
-
     public Main() {
         initComponents();
         setExtendedState(Main.MAXIMIZED_BOTH);
