@@ -283,6 +283,12 @@ public class Book extends javax.swing.JFrame {
             String bookname = textBookName.getText();
             String author = textAuthor.getText();
             String publisher = textPublisher.getText();
+
+            // Kiem tra nhap
+            if (bookid.isEmpty() || bookname.isEmpty() || author.isEmpty() || publisher.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
             
             pst = con.prepareStatement("INSERT INTO book (bookid, bookname, author, publisher)VALUES(?, ?, ?, ?)");
             
@@ -310,7 +316,13 @@ public class Book extends javax.swing.JFrame {
             String bookname = textBookName.getText();
             String author = textAuthor.getText();
             String publisher = textPublisher.getText();
-            
+
+            // Kiểm tra dữ liệu nhập
+            if (bookid.isEmpty() || bookname.isEmpty() || author.isEmpty() || publisher.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             pst = con.prepareStatement("UPDATE book SET bookname= ?, author= ?, publisher= ? where bookid= ?");
                       
             pst.setString(1, bookname);
@@ -318,8 +330,13 @@ public class Book extends javax.swing.JFrame {
             pst.setString(3, publisher);
             pst.setString(4, bookid);
             
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Update thông tin sách thành công!");
+            // Kiem tra co sach khong
+            int rowsUpdated = pst.executeUpdate();
+            if (rowsUpdated > 0) {
+                JOptionPane.showMessageDialog(this, "Cập nhật thông tin thành công!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy sách với ID đã nhập!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            }
             BookData();
         } catch (SQLException ex) {
             Logger.getLogger(Book.class.getName()).log(Level.SEVERE, null, ex);
@@ -333,11 +350,23 @@ public class Book extends javax.swing.JFrame {
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         try {
             String bookid = textBookID.getText();
+
+            // Kiểm tra nếu bookid trống
+            if (bookid.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập ID sách cần xóa!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             pst = con.prepareStatement("DELETE FROM book WHERE bookid=?");
             pst.setString(1, bookid);
 
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Xóa thông tin sách thành công!");
+            // Kiem tra id sach co dung khong
+            int rowsDeleted = pst.executeUpdate();
+            if (rowsDeleted > 0) {
+                JOptionPane.showMessageDialog(this, "Xóa thông tin sách thành công!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy sách với ID đã nhập!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            }
             BookData();
         } catch (SQLException ex) {
             Logger.getLogger(Book.class.getName()).log(Level.SEVERE, null, ex);

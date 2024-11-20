@@ -293,6 +293,12 @@ public class Librarian extends javax.swing.JFrame {
             String name = textLibrarianName.getText();
             String email = textEmail.getText();
             String address = textAddress.getText();
+
+            // Kiem tra nhap
+            if (librarianid.isEmpty() || name.isEmpty() || email.isEmpty() || address.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
             
             pst = con.prepareStatement("INSERT INTO librarian (librarianid, name, email, address)VALUES(?, ?, ?, ?)");
             
@@ -315,6 +321,12 @@ public class Librarian extends javax.swing.JFrame {
             String name = textLibrarianName.getText();
             String email = textEmail.getText();
             String address = textAddress.getText();
+
+            // Kiểm tra dữ liệu nhập
+            if (librarianid.isEmpty() || name.isEmpty() || email.isEmpty() || address.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
             
             pst = con.prepareStatement("UPDATE librarian SET name= ?, email= ?, address= ? where librarianid= ?");
                       
@@ -323,8 +335,13 @@ public class Librarian extends javax.swing.JFrame {
             pst.setString(3, address);
             pst.setString(4, librarianid);
             
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Update thông tin thủ thư thành công");
+            // Kiem tra co thu thu khong
+            int rowsUpdated = pst.executeUpdate();
+            if (rowsUpdated > 0) {
+                JOptionPane.showMessageDialog(this, "Cập nhật thông tin thành công!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy thủ thư với ID đã nhập!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            }
             LibrarianData();
         } catch (SQLException ex) {
             Logger.getLogger(Librarian.class.getName()).log(Level.SEVERE, null, ex);
@@ -342,11 +359,23 @@ public class Librarian extends javax.swing.JFrame {
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         try {
             String librarianid = textLibrarianID.getText();
+
+            // Kiểm tra nếu studentid trống
+            if (librarianid.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập ID thủ thư cần xóa!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             pst = con.prepareStatement("DELETE FROM librarian WHERE librarianid=?");
             pst.setString(1, librarianid);
 
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Xóa thông tin thủ thư thành công");
+            // Kiem tra id co dung khong
+            int rowsDeleted = pst.executeUpdate();
+            if (rowsDeleted > 0) {
+                JOptionPane.showMessageDialog(this, "Xóa thông tin thủ thư thành công!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy thủ thư với ID đã nhập!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            }
             LibrarianData();
         } catch (SQLException ex) {
             Logger.getLogger(Librarian.class.getName()).log(Level.SEVERE, null, ex);

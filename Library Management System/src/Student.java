@@ -292,6 +292,12 @@ public class Student extends javax.swing.JFrame {
             String studentname = textStudentName.getText();
             String email = textEmail.getText();
             String address = textAddress.getText();
+
+            // Kiem tra nhap
+            if (studentid.isEmpty() || studentname.isEmpty() || email.isEmpty() || address.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
             
             pst = con.prepareStatement("INSERT INTO student (studentid, studentname, email, address)VALUES(?, ?, ?, ?)");
             
@@ -314,6 +320,12 @@ public class Student extends javax.swing.JFrame {
             String studentname = textStudentName.getText();
             String email = textEmail.getText();
             String address = textAddress.getText();
+
+            // Kiểm tra dữ liệu nhập
+            if (studentid.isEmpty() || studentname.isEmpty() || email.isEmpty() || address.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
             
             pst = con.prepareStatement("UPDATE student SET studentname=?, email=?, address=? where studentid=?");
                       
@@ -321,9 +333,14 @@ public class Student extends javax.swing.JFrame {
             pst.setString(2, email);
             pst.setString(3, address);
             pst.setString(4, studentid);
-            
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Update thông tin thành công!");
+
+            // Kiem tra co sinh vien khong
+            int rowsUpdated = pst.executeUpdate();
+            if (rowsUpdated > 0) {
+                JOptionPane.showMessageDialog(this, "Cập nhật thông tin thành công!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy sinh viên với ID đã nhập!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            }
             StudentData();
         } catch (SQLException ex) {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
@@ -337,11 +354,23 @@ public class Student extends javax.swing.JFrame {
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         try {
             String studentid = textStudentID.getText();
+
+            // Kiểm tra nếu studentid trống
+            if (studentid.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập ID sinh viên cần xóa!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             pst=con.prepareStatement("DELETE FROM student WHERE studentid=?");
             pst.setString(1, studentid);
 
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Xóa thông tin sinh viên thành công!");
+            // Kiem tra id sinh vien co dung khong
+            int rowsDeleted = pst.executeUpdate();
+            if (rowsDeleted > 0) {
+                JOptionPane.showMessageDialog(this, "Xóa thông tin sinh viên thành công!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy sinh viên với ID đã nhập!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            }
             StudentData();
         } catch (SQLException ex) {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);

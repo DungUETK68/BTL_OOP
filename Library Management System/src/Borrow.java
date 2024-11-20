@@ -290,6 +290,12 @@ public class Borrow extends javax.swing.JFrame {
             String bookid = textBookID.getText();
             String studentid = textStudentID.getText();
 
+            // Kiem tra nhap
+            if (bookid.isEmpty() || studentid.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             pst = con.prepareStatement("INSERT INTO borrow (bookid, studentid, date_borrow, date_return)VALUES(?, ?, ?, ?)");
             
             pst.setString(1, bookid);
@@ -317,6 +323,12 @@ public class Borrow extends javax.swing.JFrame {
         try {
             String bookid = textBookID.getText();
             String studentid = textStudentID.getText();
+
+            // Kiểm tra dữ liệu nhập
+            if (bookid.isEmpty() || studentid.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
                         
             pst = con.prepareStatement("UPDATE borrow SET studentid= ?, date_borrow= ?, date_return= ? where bookid= ?");
                       
@@ -327,8 +339,14 @@ public class Borrow extends javax.swing.JFrame {
             String date_return = sdf.format(DateChooserReturn.getDate());
             pst.setString(2, date_borrowed);
             pst.setString(3, date_return);
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Update thông tin mượn sách thành công");
+
+            // Kiem tra co sach khong
+            int rowsUpdated = pst.executeUpdate();
+            if (rowsUpdated > 0) {
+                JOptionPane.showMessageDialog(this, "Cập nhật thông tin thành công!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy sách với ID đã nhập!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            }
             BorrowData();
         } catch (SQLException ex) {
             Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
@@ -338,11 +356,23 @@ public class Borrow extends javax.swing.JFrame {
     private void buttonReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReturnActionPerformed
         try {
             String bookid = textBookID.getText();
+
+            // Kiểm tra nếu bookid trống
+            if (bookid.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập ID sách cần trả!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             pst = con.prepareStatement("DELETE FROM borrow WHERE bookid=?");
             pst.setString(1, bookid);
             
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Trả sách thành công!");
+            // Kiem tra id sach co dung khong
+            int rowsDeleted = pst.executeUpdate();
+            if (rowsDeleted > 0) {
+                JOptionPane.showMessageDialog(this, "Trả sách thành công!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy sách với ID đã nhập!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            }
             BorrowData();
 
             // Them sach vao danh sach khi tra sach
