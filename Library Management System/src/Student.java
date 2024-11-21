@@ -41,7 +41,7 @@ public class Student extends javax.swing.JFrame {
             while (Rs.next()) {
                 Vector v2 = new Vector();
 
-                for (int aa = 1; aa <= QQ; aa++) {
+                for (int aa = 1; aa <= 4; aa++) {
                     v2.add(Rs.getString("studentid"));
                     v2.add(Rs.getString("studentname"));
                     v2.add(Rs.getString("email"));
@@ -299,12 +299,14 @@ public class Student extends javax.swing.JFrame {
                 return;
             }
             
-            pst = con.prepareStatement("INSERT INTO student (studentid, studentname, email, address)VALUES(?, ?, ?, ?)");
+            pst = con.prepareStatement("INSERT INTO student (studentid, studentname, email, address, username, password)VALUES(?, ?, ?, ?, ?, ?)");
             
             pst.setString(1, studentid);
             pst.setString(2, studentname);
             pst.setString(3, email);
             pst.setString(4, address);
+            pst.setString(5, " ");
+            pst.setString(6, " ");
             
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Thêm thông tin sinh viên thành công!");
