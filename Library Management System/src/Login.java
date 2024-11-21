@@ -1,7 +1,9 @@
-
+import java.sql.*;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
+    public static boolean isLibrarian = false;
+    private Connection con;
     public Login() {
         initComponents();
     }
@@ -18,6 +20,7 @@ public class Login extends javax.swing.JFrame {
         password = new javax.swing.JTextField();
         buttonLogin = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        Register = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -79,6 +82,15 @@ public class Login extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/person.jpg"))); // NOI18N
         jLabel4.setText("jLabel4");
 
+        Register.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Register.setText("*or click here create a new account*");
+        Register.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Register.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RegisterMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,18 +99,24 @@ public class Login extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
                         .addGap(25, 25, 25))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(buttonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(77, 77, 77))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(78, 78, 78)
+                                .addComponent(buttonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(Register)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,6 +138,8 @@ public class Login extends javax.swing.JFrame {
                         .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(buttonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Register)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -130,21 +150,54 @@ public class Login extends javax.swing.JFrame {
     private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
 
     }//GEN-LAST:event_usernameActionPerformed
-
+ 
     private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
 
     }//GEN-LAST:event_passwordActionPerformed
 
+    // kiem tra tk admin, neu ko phai admin thi tiep tuc kiem tra tai khoan sinh vien
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
         String user = username.getText();
         String pass = password.getText();
-        
         if (user.equals("admin") && pass.equals("admin")) {
             new Main().setVisible(true);
+            isLibrarian = true;
         } else {
-            JOptionPane.showMessageDialog(null, "Tài khoản hoặc Mật khẩu không đúng!");
+            isLibrarian = false;
+            try{
+                Class.forName("com.mysql.jdbc.Driver");
+                con = DriverManager.getConnection("jdbc:mysql://localhost/library", "root", "");
+            
+                Statement stm = con.createStatement();
+                String sql = "select * from student where username='"+user+"' and password='"+pass+"'";
+                ResultSet rs = stm.executeQuery(sql);
+            
+                if(rs.next()){
+                    //if user and pass is true then go to main
+                    new Main().setVisible(true);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Tài khoản hoặc Mật khẩu không đúng!");
+                    username.setText("");
+                    password.setText("");
+                }
+            
+                con.close();
+            }catch(Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
     }//GEN-LAST:event_buttonLoginActionPerformed
+
+    private void RegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegisterMouseClicked
+        // TODO add your handling code here:
+        dispose();
+        Register rg = new Register();
+        rg.setVisible(true);
+        rg.pack();
+        rg.setLocationRelativeTo(null);
+        
+        //rg.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }//GEN-LAST:event_RegisterMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -178,6 +231,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Register;
     private javax.swing.JButton buttonLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

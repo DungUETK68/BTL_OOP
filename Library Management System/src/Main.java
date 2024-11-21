@@ -1,4 +1,6 @@
 
+import javax.swing.JOptionPane;
+
 public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
@@ -155,15 +157,27 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStudentActionPerformed
-        new Student().setVisible(true);
+        if (Login.isLibrarian == true) {
+            new Student().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Bạn non!");
+        }
     }//GEN-LAST:event_buttonStudentActionPerformed
    
     private void buttonLibrarianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLibrarianActionPerformed
-        new Librarian().setVisible(true);
+         if (Login.isLibrarian == true) {
+            new Librarian().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Bạn non!");
+        }
     }//GEN-LAST:event_buttonLibrarianActionPerformed
 
     private void buttonBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBookActionPerformed
-        new Book().setVisible(true);
+         if (Login.isLibrarian == true) {
+            new Book().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Bạn non!");
+        }
     }//GEN-LAST:event_buttonBookActionPerformed
 
     private void buttonBorrowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBorrowActionPerformed
