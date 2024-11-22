@@ -160,7 +160,7 @@ public class Main extends javax.swing.JFrame {
         if (Login.isLibrarian == true) {
             new Student().setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(this, "Bạn non!");
+            JOptionPane.showMessageDialog(this, "Bạn không có quyền truy cập!");
         }
     }//GEN-LAST:event_buttonStudentActionPerformed
    
@@ -168,7 +168,7 @@ public class Main extends javax.swing.JFrame {
          if (Login.isLibrarian == true) {
             new Librarian().setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(this, "Bạn non!");
+             JOptionPane.showMessageDialog(this, "Bạn không có quyền truy cập!");
         }
     }//GEN-LAST:event_buttonLibrarianActionPerformed
 
@@ -176,7 +176,7 @@ public class Main extends javax.swing.JFrame {
          if (Login.isLibrarian == true) {
             new Book().setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(this, "Bạn non!");
+             JOptionPane.showMessageDialog(this, "Bạn không có quyền truy cập!");
         }
     }//GEN-LAST:event_buttonBookActionPerformed
 
