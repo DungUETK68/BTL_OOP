@@ -83,7 +83,7 @@ public class Login extends javax.swing.JFrame {
         jLabel4.setText("jLabel4");
 
         Register.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Register.setText("*or click here create a new account*");
+        Register.setText("*Nhấn để đăng ký tài khoản*");
         Register.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Register.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -114,7 +114,7 @@ public class Login extends javax.swing.JFrame {
                                 .addGap(78, 78, 78)
                                 .addComponent(buttonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(50, 50, 50)
+                                .addGap(68, 68, 68)
                                 .addComponent(Register)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );

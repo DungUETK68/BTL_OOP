@@ -48,7 +48,7 @@
                               <Component id="buttonLogin" min="-2" pref="138" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                               <Component id="Register" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -199,7 +199,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="12" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="*or click here create a new account*"/>
+        <Property name="text" type="java.lang.String" value="*Nh&#x1ea5;n &#x111;&#x1ec3; &#x111;&#x103;ng k&#xfd; t&#xe0;i kho&#x1ea3;n*"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Hand Cursor"/>
         </Property>
