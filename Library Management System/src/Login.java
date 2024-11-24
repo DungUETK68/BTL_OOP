@@ -162,6 +162,7 @@ public class Login extends javax.swing.JFrame {
         if (user.equals("admin") && pass.equals("admin")) {
             new Main().setVisible(true);
             isLibrarian = true;
+            dispose();
         } else {
             isLibrarian = false;
             try{
@@ -175,6 +176,7 @@ public class Login extends javax.swing.JFrame {
                 if(rs.next()){
                     //if user and pass is true then go to main
                     new Main().setVisible(true);
+                    dispose();
                 }else{
                     JOptionPane.showMessageDialog(null, "Tài khoản hoặc Mật khẩu không đúng!");
                     username.setText("");
@@ -190,9 +192,9 @@ public class Login extends javax.swing.JFrame {
 
     private void RegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegisterMouseClicked
         // TODO add your handling code here:
-        dispose();
         Register rg = new Register();
         rg.setVisible(true);
+        dispose();
         rg.pack();
         rg.setLocationRelativeTo(null);
         

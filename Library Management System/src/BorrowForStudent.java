@@ -8,14 +8,14 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-public class Borrow extends javax.swing.JFrame {
+public class BorrowForStudent extends javax.swing.JFrame {
     private Connection con;
     private PreparedStatement pst;
 
-    public Borrow() {
+    public BorrowForStudent() {
         initComponents();
         Connect();
-        BorrowData();
+        BookData();
     }
     
     public void Connect() {
@@ -27,51 +27,50 @@ public class Borrow extends javax.swing.JFrame {
         }
     }
 
-    public void countBorrows() {
+    public void countBooks() {
         try {
             int QQ;
-            pst = con.prepareStatement("SELECT COUNT(1) as NumberOfBooks FROM borrow");
+            pst = con.prepareStatement("SELECT COUNT(1) as NumberOfBooks FROM book");
             ResultSet Rs = pst.executeQuery();
             Rs.next();
             QQ = Rs.getInt("NumberOfBooks");
-            countBorrow.setText("Số sách đã mượn: " + Integer.toString(QQ));
+            countBook.setText("Tổng số sách: " + Integer.toString(QQ));
         } catch (SQLException ex) {
-            Logger.getLogger(Book.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BorrowForStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    private void BorrowData() {
+    private void BookData() {
         try {
             int QQ;
-            pst = con.prepareStatement("SELECT * FROM borrow");
+            pst = con.prepareStatement("SELECT * FROM book");
             ResultSet Rs = pst.executeQuery();
 
             ResultSetMetaData RSMD = Rs.getMetaData();
 
             QQ = RSMD.getColumnCount();
-            
-            DefaultTableModel DFG = (DefaultTableModel) tableBorrow.getModel();
-            
+
+            DefaultTableModel DFG = (DefaultTableModel) tableBook.getModel();
+
             DFG.setRowCount(0);
-             
+
             while (Rs.next()) {
                 Vector v2 = new Vector();
 
-                for (int aa = 1; aa <= QQ; aa++) {
+                for (int aa = 1; aa <= 4; aa++) {
                     v2.add(Rs.getString("bookid"));
-                    v2.add(Rs.getString("studentid"));
-                    v2.add(Rs.getString("date_borrow"));
-                    v2.add(Rs.getString("date_return"));
+                    v2.add(Rs.getString("bookname"));
+                    v2.add(Rs.getString("author"));
+                    v2.add(Rs.getString("publisher"));
                 }
                 DFG.addRow(v2);
             }
 
-            countBorrows();
+            countBooks();
         } catch (SQLException ex) {
-            Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Book.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -82,7 +81,7 @@ public class Borrow extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         buttonExit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableBorrow = new javax.swing.JTable();
+        tableBook = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -97,7 +96,7 @@ public class Borrow extends javax.swing.JFrame {
         DateChooserReturn = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
         textSearch = new javax.swing.JTextField();
-        countBorrow = new javax.swing.JLabel();
+        countBook = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
         jTextArea1.setColumns(20);
@@ -111,7 +110,7 @@ public class Borrow extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Danh sách mượn");
+        jLabel1.setText("Mượn sách");
 
         buttonExit.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         buttonExit.setText("X");
@@ -126,9 +125,9 @@ public class Borrow extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(335, Short.MAX_VALUE)
+                .addContainerGap(397, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(307, 307, 307)
+                .addGap(344, 344, 344)
                 .addComponent(buttonExit, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -142,8 +141,8 @@ public class Borrow extends javax.swing.JFrame {
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        tableBorrow.setBackground(new java.awt.Color(255, 255, 255));
-        tableBorrow.setModel(new javax.swing.table.DefaultTableModel(
+        tableBook.setBackground(new java.awt.Color(255, 255, 255));
+        tableBook.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -151,8 +150,8 @@ public class Borrow extends javax.swing.JFrame {
                 "BookID", "StudentID", "Date_Borrowed", "Date_Return"
             }
         ));
-        tableBorrow.setRowHeight(30);
-        jScrollPane1.setViewportView(tableBorrow);
+        tableBook.setRowHeight(30);
+        jScrollPane1.setViewportView(tableBook);
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -212,9 +211,9 @@ public class Borrow extends javax.swing.JFrame {
             }
         });
 
-        countBorrow.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        countBorrow.setForeground(new java.awt.Color(0, 0, 0));
-        countBorrow.setText("jLabel4");
+        countBook.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        countBook.setForeground(new java.awt.Color(0, 0, 0));
+        countBook.setText("jLabel4");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
@@ -236,7 +235,7 @@ public class Borrow extends javax.swing.JFrame {
                             .addGap(42, 42, 42)
                             .addComponent(buttonReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(43, 43, 43)
-                            .addComponent(countBorrow, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(countBook, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -290,7 +289,7 @@ public class Borrow extends javax.swing.JFrame {
                     .addComponent(buttonInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(countBorrow, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(countBook, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37))
         );
 
@@ -343,12 +342,13 @@ public class Borrow extends javax.swing.JFrame {
             
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Thêm thông tin mượn sách thành công!");
-            BorrowData();
 
             // Xoa sach trong danh sach sau khi muon
             pst = con.prepareStatement("DELETE FROM book WHERE bookid=?");
             pst.setString(1, bookid);
             pst.executeUpdate();
+
+            BookData();
         } catch (SQLException ex) {
             Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -382,7 +382,7 @@ public class Borrow extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy sách với ID đã nhập!", "Thông báo", JOptionPane.WARNING_MESSAGE);
             }
-            BorrowData();
+            BookData();
         } catch (SQLException ex) {
             Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -408,12 +408,13 @@ public class Borrow extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy sách với ID đã nhập!", "Thông báo", JOptionPane.WARNING_MESSAGE);
             }
-            BorrowData();
 
             // Them sach vao danh sach khi tra sach
             pst = con.prepareStatement("INSERT INTO book (bookid, bookname, author, publisher) SELECT bookid, bookname, author, publisher FROM history WHERE bookid=?");
             pst.setString(1, bookid);
             pst.executeUpdate();
+
+            BookData();
         } catch (SQLException ex) {
             Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -424,9 +425,9 @@ public class Borrow extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonExitActionPerformed
 
     private void textSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSearchKeyReleased
-        DefaultTableModel obj = (DefaultTableModel)tableBorrow.getModel();
+        DefaultTableModel obj = (DefaultTableModel) tableBook.getModel();
         TableRowSorter<DefaultTableModel> obj1 = new TableRowSorter<>(obj);
-        tableBorrow.setRowSorter(obj1);
+        tableBook.setRowSorter(obj1);
         obj1.setRowFilter(RowFilter.regexFilter(textSearch.getText()));
     }//GEN-LAST:event_textSearchKeyReleased
     
@@ -470,7 +471,7 @@ public class Borrow extends javax.swing.JFrame {
     private javax.swing.JButton buttonInsert;
     private javax.swing.JButton buttonReturn;
     private javax.swing.JButton buttonUpdate;
-    private javax.swing.JLabel countBorrow;
+    private javax.swing.JLabel countBook;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -483,7 +484,7 @@ public class Borrow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTable tableBorrow;
+    private javax.swing.JTable tableBook;
     private javax.swing.JTextField textBookID;
     private javax.swing.JTextField textSearch;
     private javax.swing.JTextField textStudentID;

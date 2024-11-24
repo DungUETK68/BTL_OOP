@@ -20,6 +20,7 @@ public class Main extends javax.swing.JFrame {
         buttonBorrow = new javax.swing.JButton();
         buttonLibrarian = new javax.swing.JButton();
         buttonLogout = new javax.swing.JButton();
+        buttonLibrarian1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,7 +70,7 @@ public class Main extends javax.swing.JFrame {
 
         buttonBook.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         buttonBook.setForeground(new java.awt.Color(0, 153, 255));
-        buttonBook.setText("Sách");
+        buttonBook.setText("Kho sách");
         buttonBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonBookActionPerformed(evt);
@@ -78,7 +79,7 @@ public class Main extends javax.swing.JFrame {
 
         buttonBorrow.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         buttonBorrow.setForeground(new java.awt.Color(0, 153, 255));
-        buttonBorrow.setText("Mượn sách");
+        buttonBorrow.setText("Danh sách mượn");
         buttonBorrow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonBorrowActionPerformed(evt);
@@ -103,15 +104,25 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        buttonLibrarian1.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        buttonLibrarian1.setForeground(new java.awt.Color(0, 153, 255));
+        buttonLibrarian1.setText("Mượn sách");
+        buttonLibrarian1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonLibrarian1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(buttonStudent, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(buttonBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(buttonBorrow, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+            .addComponent(buttonBorrow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(buttonLibrarian, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(buttonLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(buttonLibrarian1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,7 +134,9 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(buttonBorrow, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonLibrarian, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buttonLibrarian1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -149,7 +162,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 629, Short.MAX_VALUE)
                         .addContainerGap())))
         );
 
@@ -181,12 +194,21 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonBookActionPerformed
 
     private void buttonBorrowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBorrowActionPerformed
-        new Borrow().setVisible(true);
+        if (Login.isLibrarian == true) {
+            new Borrow().setVisible(true);
+        } else {
+             JOptionPane.showMessageDialog(this, "Bạn không có quyền truy cập!");
+        }
     }//GEN-LAST:event_buttonBorrowActionPerformed
 
     private void buttonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogoutActionPerformed
+        new Login().setVisible(true);
         dispose();
     }//GEN-LAST:event_buttonLogoutActionPerformed
+
+    private void buttonLibrarian1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLibrarian1ActionPerformed
+        new BorrowForStudent().setVisible(true);
+    }//GEN-LAST:event_buttonLibrarian1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -224,6 +246,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton buttonBook;
     private javax.swing.JButton buttonBorrow;
     private javax.swing.JButton buttonLibrarian;
+    private javax.swing.JButton buttonLibrarian1;
     private javax.swing.JButton buttonLogout;
     private javax.swing.JButton buttonStudent;
     private javax.swing.JLabel jLabel1;
