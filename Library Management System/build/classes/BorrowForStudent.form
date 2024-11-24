@@ -79,9 +79,9 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace pref="335" max="32767" attributes="0"/>
+                  <EmptySpace pref="397" max="32767" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="307" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="344" max="-2" attributes="0"/>
                   <Component id="buttonExit" min="-2" pref="51" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               </Group>
@@ -109,7 +109,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Danh s&#xe1;ch m&#x1b0;&#x1ee3;n"/>
+            <Property name="text" type="java.lang.String" value="M&#x1b0;&#x1ee3;n s&#xe1;ch"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="buttonExit">
@@ -132,7 +132,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="tableBorrow">
+        <Component class="javax.swing.JTable" name="tableBook">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -199,7 +199,7 @@
                               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                               <Component id="buttonReturn" min="-2" pref="100" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                              <Component id="countBorrow" min="-2" pref="177" max="-2" attributes="0"/>
+                              <Component id="countBook" min="-2" pref="177" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
@@ -269,7 +269,7 @@
                       <Component id="buttonInsert" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                       <Component id="buttonUpdate" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                       <Component id="buttonReturn" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                      <Component id="countBorrow" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="countBook" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               </Group>
@@ -396,7 +396,7 @@
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textSearchKeyReleased"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="countBorrow">
+        <Component class="javax.swing.JLabel" name="countBook">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="1"/>

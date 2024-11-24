@@ -40,7 +40,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel2" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="jLabel3" pref="0" max="32767" attributes="0"/>
+                      <Component id="jLabel3" pref="629" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -117,9 +117,10 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="buttonStudent" alignment="1" max="32767" attributes="0"/>
               <Component id="buttonBook" alignment="0" max="32767" attributes="0"/>
-              <Component id="buttonBorrow" alignment="0" pref="202" max="32767" attributes="0"/>
+              <Component id="buttonBorrow" alignment="0" max="32767" attributes="0"/>
               <Component id="buttonLibrarian" alignment="0" max="32767" attributes="0"/>
               <Component id="buttonLogout" alignment="0" max="32767" attributes="0"/>
+              <Component id="buttonLibrarian1" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -132,7 +133,9 @@
                   <Component id="buttonBorrow" min="-2" pref="101" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="buttonLibrarian" min="-2" pref="101" max="-2" attributes="0"/>
-                  <EmptySpace pref="40" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="buttonLibrarian1" min="-2" pref="101" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="buttonLogout" min="-2" pref="99" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -161,7 +164,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="S&#xe1;ch"/>
+            <Property name="text" type="java.lang.String" value="Kho s&#xe1;ch"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonBookActionPerformed"/>
@@ -175,7 +178,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="M&#x1b0;&#x1ee3;n s&#xe1;ch"/>
+            <Property name="text" type="java.lang.String" value="Danh s&#xe1;ch m&#x1b0;&#x1ee3;n"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonBorrowActionPerformed"/>
@@ -207,6 +210,20 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonLogoutActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="buttonLibrarian1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="22" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="99" red="0" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="M&#x1b0;&#x1ee3;n s&#xe1;ch"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonLibrarian1ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
