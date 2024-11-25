@@ -222,12 +222,12 @@ public class Register extends javax.swing.JFrame {
             con = DriverManager.getConnection("jdbc:mysql://localhost/library", "root", "");
 
             Statement stm = con.createStatement();
-            String sql = "SELECT * FROM student WHERE username='" + username + "' and password='" + password + "'";
+            String sql = "SELECT * FROM student WHERE username='" + username + "'";
             ResultSet rs = stm.executeQuery(sql);
 
             if (rs.next()) {
                 //neu tai khoan va mat khau da ton tai 
-                JOptionPane.showMessageDialog(null, "Tài khoản hoặc Mật khẩu đã tồn tại!");
+                JOptionPane.showMessageDialog(this, "Tải khoản đã tồn tại!", "Thông báo", JOptionPane.WARNING_MESSAGE);
                 usernameRe.setText("");
                 passwordRe.setText("");
             } else {
