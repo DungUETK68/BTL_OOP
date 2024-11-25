@@ -327,6 +327,20 @@ public class Borrow extends javax.swing.JFrame {
                 return;
             }
 
+            // Xoa sach trong danh sach
+            pst = con.prepareStatement("DELETE FROM book WHERE bookid=?");
+            pst.setString(1, bookid);
+
+            // Kiem tra id sach co dung khong
+            int rowsDeleted = pst.executeUpdate();
+            if (rowsDeleted > 0) {
+                JOptionPane.showMessageDialog(this, "Mượn sách thành công!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy sách với ID đã nhập!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Them vao danh sach muon
             pst = con.prepareStatement("INSERT INTO borrow (bookid, studentid, date_borrow, date_return)VALUES(?, ?, ?, ?)");
 
             pst.setString(1, bookid);
@@ -336,15 +350,9 @@ public class Borrow extends javax.swing.JFrame {
             String date_return = sdf.format(DateChooserReturn.getDate());
             pst.setString(3, date_borrow);
             pst.setString(4, date_return);
-
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Thêm thông tin mượn sách thành công!");
+
             BorrowData();
-
-            // Xoa sach trong danh sach sau khi muon
-            pst = con.prepareStatement("DELETE FROM book WHERE bookid=?");
-            pst.setString(1, bookid);
-            pst.executeUpdate();
         } catch (SQLException e) {
             Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, e);
         }

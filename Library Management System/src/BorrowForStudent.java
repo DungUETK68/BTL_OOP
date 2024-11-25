@@ -309,7 +309,7 @@ public class BorrowForStudent extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -327,6 +327,20 @@ public class BorrowForStudent extends javax.swing.JFrame {
                 return;
             }
 
+            // Xoa sach trong danh sach
+            pst = con.prepareStatement("DELETE FROM book WHERE bookid=?");
+            pst.setString(1, bookid);
+
+            // Kiem tra id sach co dung khong
+            int rowsDeleted = pst.executeUpdate();
+            if (rowsDeleted > 0) {
+                JOptionPane.showMessageDialog(this, "Mượn sách thành công!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy sách với ID đã nhập!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Them vao danh sach muon
             pst = con.prepareStatement("INSERT INTO borrow (bookid, studentid, date_borrow, date_return)VALUES(?, ?, ?, ?)");
 
             pst.setString(1, bookid);
@@ -336,13 +350,6 @@ public class BorrowForStudent extends javax.swing.JFrame {
             String date_return = sdf.format(DateChooserReturn.getDate());
             pst.setString(3, date_borrow);
             pst.setString(4, date_return);
-
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Thêm thông tin mượn sách thành công!");
-
-            // Xoa sach trong danh sach sau khi muon
-            pst = con.prepareStatement("DELETE FROM book WHERE bookid=?");
-            pst.setString(1, bookid);
             pst.executeUpdate();
 
             BookData();

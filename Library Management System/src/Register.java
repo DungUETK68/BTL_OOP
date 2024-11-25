@@ -202,18 +202,18 @@ public class Register extends javax.swing.JFrame {
     private void CreateReActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateReActionPerformed
         try {
             String name = nameRe.getText();
-            String user = usernameRe.getText();
-            String pass = passwordRe.getText();
-            String code = studentCodeRe.getText();
+            String username = usernameRe.getText();
+            String password = passwordRe.getText();
+            String studentid = studentCodeRe.getText();
             String address = addressRe.getText();
             String email = emailRe.getText();
 
-            if (name.isEmpty() || user.isEmpty() || pass.isEmpty() || code.isEmpty() || address.isEmpty() || email.isEmpty()) {
+            if (name.isEmpty() || username.isEmpty() || password.isEmpty() || studentid.isEmpty() || address.isEmpty() || email.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!", "Thông báo", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
-            if (user.equals("admin") || pass.equals("password")) {
+            if (username.equals("admin") || password.equals("password")) {
                 JOptionPane.showMessageDialog(this, "Tải khoản đã tồn tại!", "Thông báo", JOptionPane.WARNING_MESSAGE);
                 return;
             }
@@ -222,7 +222,7 @@ public class Register extends javax.swing.JFrame {
             con = DriverManager.getConnection("jdbc:mysql://localhost/library", "root", "");
 
             Statement stm = con.createStatement();
-            String sql = "select * from student where username='" + user + "' and password='" + pass + "'";
+            String sql = "SELECT * FROM student WHERE username='" + username + "' and password='" + password + "'";
             ResultSet rs = stm.executeQuery(sql);
 
             if (rs.next()) {
@@ -234,12 +234,12 @@ public class Register extends javax.swing.JFrame {
                 //them tai khoan vao database
                 pst = con.prepareStatement("INSERT INTO student (studentid, studentname, email, address, username, password)VALUES(?, ?, ?, ?, ?, ?)");
 
-                pst.setString(1, code);
+                pst.setString(1, studentid);
                 pst.setString(2, name);
                 pst.setString(3, email);
                 pst.setString(4, address);
-                pst.setString(5, user);
-                pst.setString(6, pass);
+                pst.setString(5, username);
+                pst.setString(6, password);
 
                 pst.executeUpdate();
                 JOptionPane.showMessageDialog(this, "Tạo tài khoản thành công!");
