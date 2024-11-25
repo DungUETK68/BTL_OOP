@@ -2,47 +2,78 @@ Library Management System
 
 Các màn hình điều khiển:
 1. Đăng nhập
-   - Tài khoản đăng nhập mặc định là (admin, admin)
+   - Đăng nhập tài khoản
+   - Nếu chưa có tài khoản có thể đăng ký
 
-![image](https://github.com/user-attachments/assets/5fcb85ed-16af-4018-bc8e-d4f1404b6235)
+![image](https://github.com/user-attachments/assets/2610b08e-9ea1-45b5-ae8e-269b17966f5e)
 
-2. Màn hìnhh chính
-   - Bao gồm 5 button với các chức năng:
-     + Tùy chỉnh thông tin sinh viên
-     + Tùy chỉnh thông tin sách
-     + Tùy chỉnh thông tin mượn sách / trả sách
-     + Tùy chỉnh thông tin thủ thư
+
+2. Đăng ký tài khoản
+   - Sinh viên đăng ký tài khoản tại đây
+   - Tài khoản này chỉ có thể truy cập vào mục "Mượn sách"
+
+![image](https://github.com/user-attachments/assets/6f1ffa75-71c1-4d88-b844-ff17bee858fe)
+
+
+4. Màn hìnhh chính
+   - Bao gồm 6 button với các chức năng:
+     + Tùy chỉnh thông tin sinh viên (Chỉ dành cho thủ thư)
+     + Tùy chỉnh thông tin kho sách (Chỉ dành cho thủ thư)
+     + Tùy chỉnh thông tin danh sách mượn sách (Chỉ dành cho thủ thư)
+     + Tùy chỉnh thông tin thủ thư (Chỉ dành cho thủ thư)
+     + Mượn sách (Sinh viên có thể truy cập)
      + Đăng xuất
 
-![image](https://github.com/user-attachments/assets/5ff4b1ef-1018-4498-8861-14b0cb930a56)
+![image](https://github.com/user-attachments/assets/4b3732fe-a39d-490c-92bc-5d2dfcc6629f)
 
-3. Tùy chỉnh sinh viên
+
+4. Tùy chỉnh thông tin sinh viên
    - Nhập các thông tin: mã sinh viên, họ tên, email, địa chỉ
    - Button thêm, sửa, xóa
+   - Hiển thị tổng số sinh viên
+   - Tìm kiếm sinh viên
    - Bảng hiển thị danh sách sinh viên
 
-![image](https://github.com/user-attachments/assets/1d58d8bd-d802-47b3-8fc6-6d9a3285f836)
+![image](https://github.com/user-attachments/assets/a65ec098-e8cd-4ac6-9768-3d283e6ac523)
 
-4. Tùy chỉnh sách
+
+5. Tùy chỉnh thông tin kho sách
    - Nhập các thông tin: mã sách, tên sách, tác giả, nhà xuất bản
    - Button thêm, sửa, xóa
-   - Bảng hiển thị danh sách các cuốn sách còn lại
+   - Hiển thị tổng số sách
+   - Tìm kiếm sách
+   - Bảng hiển thị danh sách các cuốn sách
 
-![image](https://github.com/user-attachments/assets/4ac79ec1-5509-45a1-a159-71dec113f29a)
+![image](https://github.com/user-attachments/assets/8a379e1e-99cf-4ba3-92ec-4ca12a3796f6)
 
 
-5. Mượn sách
+6. Tùy chỉnh thông tin danh sách mượn sách
    - Nhập các thông tin: mã sách, mã sinh viên, ngày mượn, ngày trả
    - Button thêm, sửa, trả sách
+   - Hiển thị số sách đã mượn
+   - Tìm kiếm sách đã mượn
    - Bảng hiển thị danh sách các cuốn sách đang được mượn
 
-![image](https://github.com/user-attachments/assets/a42171f9-c5ed-4414-81d6-8bce875b443b)
+![image](https://github.com/user-attachments/assets/2a2ba31f-a014-460f-b518-d097b39351e2)
 
 
-6. Tùy chỉnh thủ thư
+7. Tùy chỉnh thông tin thủ thư
    - Nhập các thông tin: mã thủ thư, họ tên, email, địa chỉ
    - Button thêm, sửa, xóa
+   - Hiển thị tổng số thủ thư
+   - Tìm kiếm thủ thư
    - Bảng hiển thị danh sách thủ thư
 
-![image](https://github.com/user-attachments/assets/65d40025-7d47-4b22-80e5-641038b13cba)
+![image](https://github.com/user-attachments/assets/fdd251cb-b338-4b48-a329-8b9b051cde5c)
+
+
+8. Tùy chỉnh thông tin mượn sách (Dành cho sinh viên)
+   - Nhập các thông tin: mã sách, mã sinh viên, ngày mượn, ngày trả
+   - Button thêm, sửa, trả sách
+   - Hiển thị tổng số sách
+   - Tìm kiếm sách
+   - Bảng hiển thị danh sách các cuốn sách
+
+![image](https://github.com/user-attachments/assets/de8fdff8-a4b3-4f85-83d7-8ea61e920814)
+
 
