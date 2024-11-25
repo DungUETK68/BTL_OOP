@@ -2,6 +2,7 @@
 import javax.swing.JOptionPane;
 
 public class Main extends javax.swing.JFrame {
+
     public Main() {
         initComponents();
         setExtendedState(Main.MAXIMIZED_BOTH);
@@ -176,20 +177,20 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Bạn không có quyền truy cập!");
         }
     }//GEN-LAST:event_buttonStudentActionPerformed
-   
+
     private void buttonLibrarianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLibrarianActionPerformed
-         if (Login.isLibrarian == true) {
+        if (Login.isLibrarian == true) {
             new Librarian().setVisible(true);
         } else {
-             JOptionPane.showMessageDialog(this, "Bạn không có quyền truy cập!");
+            JOptionPane.showMessageDialog(this, "Bạn không có quyền truy cập!");
         }
     }//GEN-LAST:event_buttonLibrarianActionPerformed
 
     private void buttonBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBookActionPerformed
-         if (Login.isLibrarian == true) {
+        if (Login.isLibrarian == true) {
             new Book().setVisible(true);
         } else {
-             JOptionPane.showMessageDialog(this, "Bạn không có quyền truy cập!");
+            JOptionPane.showMessageDialog(this, "Bạn không có quyền truy cập!");
         }
     }//GEN-LAST:event_buttonBookActionPerformed
 
@@ -197,7 +198,7 @@ public class Main extends javax.swing.JFrame {
         if (Login.isLibrarian == true) {
             new Borrow().setVisible(true);
         } else {
-             JOptionPane.showMessageDialog(this, "Bạn không có quyền truy cập!");
+            JOptionPane.showMessageDialog(this, "Bạn không có quyền truy cập!");
         }
     }//GEN-LAST:event_buttonBorrowActionPerformed
 
@@ -234,7 +235,6 @@ public class Main extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Main().setVisible(true);

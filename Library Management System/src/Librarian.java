@@ -1,3 +1,4 @@
+
 import java.sql.*;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -8,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 public class Librarian extends javax.swing.JFrame {
+
     private Connection con;
     private PreparedStatement pst;
 
@@ -21,53 +23,47 @@ public class Librarian extends javax.swing.JFrame {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/library", "root", "");
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(Librarian.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | SQLException e) {
+            Logger.getLogger(Librarian.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
     public void countLibrarians() {
         try {
-            int QQ;
+            int count;
             pst = con.prepareStatement("SELECT COUNT(1) as NumberOfLibrarians FROM librarian");
             ResultSet Rs = pst.executeQuery();
             Rs.next();
-            QQ = Rs.getInt("NumberOfLibrarians");
-            countLibrarian.setText("Tổng số thủ thư: " + Integer.toString(QQ));
-        } catch (SQLException ex) {
-            Logger.getLogger(Book.class.getName()).log(Level.SEVERE, null, ex);
+            count = Rs.getInt("NumberOfLibrarians");
+            countLibrarian.setText("Tổng số thủ thư: " + Integer.toString(count));
+        } catch (SQLException e) {
+            Logger.getLogger(Librarian.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-    
+
     private void LibrarianData() {
         try {
-            int QQ;
             pst = con.prepareStatement("SELECT * FROM librarian");
             ResultSet Rs = pst.executeQuery();
-            
-            ResultSetMetaData RSMD = Rs.getMetaData();
 
-            QQ = RSMD.getColumnCount();
-            
             DefaultTableModel DFG = (DefaultTableModel) tableLibrarian.getModel();
-            
             DFG.setRowCount(0);
-             
-            while (Rs.next()) {
-                Vector v2 = new Vector();
 
-                for (int aa = 1; aa <= QQ; aa++) {
-                    v2.add(Rs.getString("librarianid"));
-                    v2.add(Rs.getString("name"));
-                    v2.add(Rs.getString("email"));
-                    v2.add(Rs.getString("address"));
+            while (Rs.next()) {
+                Vector v = new Vector();
+
+                for (int i = 1; i <= 4; i++) {
+                    v.add(Rs.getString("librarianid"));
+                    v.add(Rs.getString("name"));
+                    v.add(Rs.getString("email"));
+                    v.add(Rs.getString("address"));
                 }
-                DFG.addRow(v2);
+                DFG.addRow(v);
             }
 
             countLibrarians();
-        } catch (SQLException ex) {
-            Logger.getLogger(Librarian.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            Logger.getLogger(Librarian.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -307,13 +303,14 @@ public class Librarian extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(buttonInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(5, 5, 5)
-                                .addComponent(countLibrarian, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(countLibrarian, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(buttonInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buttonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(27, 27, 27))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -358,19 +355,19 @@ public class Librarian extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!", "Thông báo", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            
+
             pst = con.prepareStatement("INSERT INTO librarian (librarianid, name, email, address)VALUES(?, ?, ?, ?)");
-            
+
             pst.setString(1, librarianid);
             pst.setString(2, name);
             pst.setString(3, email);
             pst.setString(4, address);
-            
+
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Thêm thông tin thủ thư thành công");
             LibrarianData();
-        } catch (SQLException ex) {
-            Logger.getLogger(Librarian.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            Logger.getLogger(Librarian.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_buttonInsertActionPerformed
 
@@ -386,14 +383,14 @@ public class Librarian extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!", "Thông báo", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            
+
             pst = con.prepareStatement("UPDATE librarian SET name= ?, email= ?, address= ? where librarianid= ?");
-                      
+
             pst.setString(1, name);
             pst.setString(2, email);
             pst.setString(3, address);
             pst.setString(4, librarianid);
-            
+
             // Kiem tra co thu thu khong
             int rowsUpdated = pst.executeUpdate();
             if (rowsUpdated > 0) {
@@ -402,13 +399,13 @@ public class Librarian extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy thủ thư với ID đã nhập!", "Thông báo", JOptionPane.WARNING_MESSAGE);
             }
             LibrarianData();
-        } catch (SQLException ex) {
-            Logger.getLogger(Librarian.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            Logger.getLogger(Librarian.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
     private void textLibrarianNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textLibrarianNameActionPerformed
-
+        // Nhap ten thu thu
     }//GEN-LAST:event_textLibrarianNameActionPerformed
 
     private void buttonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExitActionPerformed
@@ -436,13 +433,13 @@ public class Librarian extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy thủ thư với ID đã nhập!", "Thông báo", JOptionPane.WARNING_MESSAGE);
             }
             LibrarianData();
-        } catch (SQLException ex) {
-            Logger.getLogger(Librarian.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            Logger.getLogger(Librarian.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     private void textSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSearchKeyReleased
-        DefaultTableModel obj = (DefaultTableModel)tableLibrarian.getModel();
+        DefaultTableModel obj = (DefaultTableModel) tableLibrarian.getModel();
         TableRowSorter<DefaultTableModel> obj1 = new TableRowSorter<>(obj);
         tableLibrarian.setRowSorter(obj1);
         obj1.setRowFilter(RowFilter.regexFilter(textSearch.getText()));
@@ -476,7 +473,6 @@ public class Librarian extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Librarian().setVisible(true);

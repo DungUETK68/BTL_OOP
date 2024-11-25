@@ -1,9 +1,14 @@
+
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
+
     public static boolean isLibrarian = false;
     private Connection con;
+
     public Login() {
         initComponents();
     }
@@ -150,7 +155,7 @@ public class Login extends javax.swing.JFrame {
     private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
 
     }//GEN-LAST:event_usernameActionPerformed
- 
+
     private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
 
     }//GEN-LAST:event_passwordActionPerformed
@@ -165,40 +170,37 @@ public class Login extends javax.swing.JFrame {
             dispose();
         } else {
             isLibrarian = false;
-            try{
+            try {
                 Class.forName("com.mysql.jdbc.Driver");
                 con = DriverManager.getConnection("jdbc:mysql://localhost/library", "root", "");
-            
+
                 Statement stm = con.createStatement();
-                String sql = "select * from student where username='"+user+"' and password='"+pass+"'";
+                String sql = "select * from student where username='" + user + "' and password='" + pass + "'";
                 ResultSet rs = stm.executeQuery(sql);
-            
-                if(rs.next()){
-                    //if user and pass is true then go to main
+
+                if (rs.next()) {
+                    // tai khoan mat khau dung
                     new Main().setVisible(true);
                     dispose();
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Tài khoản hoặc Mật khẩu không đúng!");
                     username.setText("");
                     password.setText("");
                 }
-            
+
                 con.close();
-            }catch(Exception e) {
-                System.out.println(e.getMessage());
+            } catch (Exception e) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
             }
         }
     }//GEN-LAST:event_buttonLoginActionPerformed
 
     private void RegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegisterMouseClicked
-        // TODO add your handling code here:
         Register rg = new Register();
         rg.setVisible(true);
         dispose();
         rg.pack();
         rg.setLocationRelativeTo(null);
-        
-        //rg.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }//GEN-LAST:event_RegisterMouseClicked
 
     public static void main(String args[]) {

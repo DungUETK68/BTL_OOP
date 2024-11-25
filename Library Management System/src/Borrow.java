@@ -1,3 +1,4 @@
+
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Vector;
@@ -9,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 public class Borrow extends javax.swing.JFrame {
+
     private Connection con;
     private PreparedStatement pst;
 
@@ -17,58 +19,52 @@ public class Borrow extends javax.swing.JFrame {
         Connect();
         BorrowData();
     }
-    
+
     public void Connect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/library", "root", "");
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | SQLException e) {
+            Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
     public void countBorrows() {
         try {
-            int QQ;
+            int count;
             pst = con.prepareStatement("SELECT COUNT(1) as NumberOfBooks FROM borrow");
             ResultSet Rs = pst.executeQuery();
             Rs.next();
-            QQ = Rs.getInt("NumberOfBooks");
-            countBorrow.setText("Số sách đã mượn: " + Integer.toString(QQ));
-        } catch (SQLException ex) {
-            Logger.getLogger(Book.class.getName()).log(Level.SEVERE, null, ex);
+            count = Rs.getInt("NumberOfBooks");
+            countBorrow.setText("Số sách đã mượn: " + Integer.toString(count));
+        } catch (SQLException e) {
+            Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-    
+
     private void BorrowData() {
         try {
-            int QQ;
             pst = con.prepareStatement("SELECT * FROM borrow");
             ResultSet Rs = pst.executeQuery();
 
-            ResultSetMetaData RSMD = Rs.getMetaData();
-
-            QQ = RSMD.getColumnCount();
-            
             DefaultTableModel DFG = (DefaultTableModel) tableBorrow.getModel();
-            
             DFG.setRowCount(0);
-             
-            while (Rs.next()) {
-                Vector v2 = new Vector();
 
-                for (int aa = 1; aa <= QQ; aa++) {
-                    v2.add(Rs.getString("bookid"));
-                    v2.add(Rs.getString("studentid"));
-                    v2.add(Rs.getString("date_borrow"));
-                    v2.add(Rs.getString("date_return"));
+            while (Rs.next()) {
+                Vector v = new Vector();
+
+                for (int i = 1; i <= 4; i++) {
+                    v.add(Rs.getString("bookid"));
+                    v.add(Rs.getString("studentid"));
+                    v.add(Rs.getString("date_borrow"));
+                    v.add(Rs.getString("date_return"));
                 }
-                DFG.addRow(v2);
+                DFG.addRow(v);
             }
 
             countBorrows();
-        } catch (SQLException ex) {
-            Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -332,7 +328,7 @@ public class Borrow extends javax.swing.JFrame {
             }
 
             pst = con.prepareStatement("INSERT INTO borrow (bookid, studentid, date_borrow, date_return)VALUES(?, ?, ?, ?)");
-            
+
             pst.setString(1, bookid);
             pst.setString(2, studentid);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -340,7 +336,7 @@ public class Borrow extends javax.swing.JFrame {
             String date_return = sdf.format(DateChooserReturn.getDate());
             pst.setString(3, date_borrow);
             pst.setString(4, date_return);
-            
+
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Thêm thông tin mượn sách thành công!");
             BorrowData();
@@ -349,8 +345,8 @@ public class Borrow extends javax.swing.JFrame {
             pst = con.prepareStatement("DELETE FROM book WHERE bookid=?");
             pst.setString(1, bookid);
             pst.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_buttonInsertActionPerformed
 
@@ -364,9 +360,9 @@ public class Borrow extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!", "Thông báo", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-                        
+
             pst = con.prepareStatement("UPDATE borrow SET studentid= ?, date_borrow= ?, date_return= ? where bookid= ?");
-                      
+
             pst.setString(1, studentid);
             pst.setString(4, bookid);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -383,8 +379,8 @@ public class Borrow extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy sách với ID đã nhập!", "Thông báo", JOptionPane.WARNING_MESSAGE);
             }
             BorrowData();
-        } catch (SQLException ex) {
-            Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
@@ -400,7 +396,7 @@ public class Borrow extends javax.swing.JFrame {
 
             pst = con.prepareStatement("DELETE FROM borrow WHERE bookid=?");
             pst.setString(1, bookid);
-            
+
             // Kiem tra id sach co dung khong
             int rowsDeleted = pst.executeUpdate();
             if (rowsDeleted > 0) {
@@ -414,8 +410,8 @@ public class Borrow extends javax.swing.JFrame {
             pst = con.prepareStatement("INSERT INTO book (bookid, bookname, author, publisher) SELECT bookid, bookname, author, publisher FROM history WHERE bookid=?");
             pst.setString(1, bookid);
             pst.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            Logger.getLogger(Borrow.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_buttonReturnActionPerformed
 
@@ -424,13 +420,12 @@ public class Borrow extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonExitActionPerformed
 
     private void textSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSearchKeyReleased
-        DefaultTableModel obj = (DefaultTableModel)tableBorrow.getModel();
+        DefaultTableModel obj = (DefaultTableModel) tableBorrow.getModel();
         TableRowSorter<DefaultTableModel> obj1 = new TableRowSorter<>(obj);
         tableBorrow.setRowSorter(obj1);
         obj1.setRowFilter(RowFilter.regexFilter(textSearch.getText()));
     }//GEN-LAST:event_textSearchKeyReleased
-    
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -455,7 +450,6 @@ public class Borrow extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Borrow().setVisible(true);

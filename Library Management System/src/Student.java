@@ -1,3 +1,4 @@
+
 import java.sql.*;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -8,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 public class Student extends javax.swing.JFrame {
+
     private Connection con;
     private PreparedStatement pst;
 
@@ -16,58 +18,52 @@ public class Student extends javax.swing.JFrame {
         Connect();
         StudentData();
     }
-    
-    public void Connect(){
+
+    public void Connect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/library", "root", "");
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | SQLException e) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
     public void countStudents() {
         try {
-            int QQ;
+            int count;
             pst = con.prepareStatement("SELECT COUNT(1) as NumberOfStudents FROM student");
             ResultSet Rs = pst.executeQuery();
             Rs.next();
-            QQ = Rs.getInt("NumberOfStudents");
-            countStudent.setText("Tổng số sinh viên: " + Integer.toString(QQ));
-        } catch (SQLException ex) {
-            Logger.getLogger(Book.class.getName()).log(Level.SEVERE, null, ex);
+            count = Rs.getInt("NumberOfStudents");
+            countStudent.setText("Tổng số sinh viên: " + Integer.toString(count));
+        } catch (SQLException e) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-    
-    private void StudentData(){
+
+    private void StudentData() {
         try {
-            int QQ;
             pst = con.prepareStatement("SELECT * FROM student");
             ResultSet Rs = pst.executeQuery();
-            
-            ResultSetMetaData RSMD = Rs.getMetaData();
 
-            QQ = RSMD.getColumnCount();
-            
             DefaultTableModel DFG = (DefaultTableModel) tableStudent.getModel();
-            
             DFG.setRowCount(0);
-             
-            while (Rs.next()) {
-                Vector v2 = new Vector();
 
-                for (int aa = 1; aa <= 4; aa++) {
-                    v2.add(Rs.getString("studentid"));
-                    v2.add(Rs.getString("studentname"));
-                    v2.add(Rs.getString("email"));
-                    v2.add(Rs.getString("address"));
+            while (Rs.next()) {
+                Vector v = new Vector();
+
+                for (int i = 1; i <= 4; i++) {
+                    v.add(Rs.getString("studentid"));
+                    v.add(Rs.getString("studentname"));
+                    v.add(Rs.getString("email"));
+                    v.add(Rs.getString("address"));
                 }
-                DFG.addRow(v2);
+                DFG.addRow(v);
             }
 
             countStudents();
-        } catch (SQLException ex) {
-            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -345,21 +341,21 @@ public class Student extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!", "Thông báo", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            
+
             pst = con.prepareStatement("INSERT INTO student (studentid, studentname, email, address, username, password)VALUES(?, ?, ?, ?, ?, ?)");
-            
+
             pst.setString(1, studentid);
             pst.setString(2, studentname);
             pst.setString(3, email);
             pst.setString(4, address);
             pst.setString(5, " ");
             pst.setString(6, " ");
-            
+
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Thêm thông tin sinh viên thành công!");
             StudentData();
-        } catch (SQLException ex) {
-            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_buttonInsertActionPerformed
 
@@ -375,9 +371,9 @@ public class Student extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!", "Thông báo", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            
+
             pst = con.prepareStatement("UPDATE student SET studentname=?, email=?, address=? where studentid=?");
-                      
+
             pst.setString(1, studentname);
             pst.setString(2, email);
             pst.setString(3, address);
@@ -391,8 +387,8 @@ public class Student extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy sinh viên với ID đã nhập!", "Thông báo", JOptionPane.WARNING_MESSAGE);
             }
             StudentData();
-        } catch (SQLException ex) {
-            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_buttonUpdateActionPerformed
 
@@ -410,7 +406,7 @@ public class Student extends javax.swing.JFrame {
                 return;
             }
 
-            pst=con.prepareStatement("DELETE FROM student WHERE studentid=?");
+            pst = con.prepareStatement("DELETE FROM student WHERE studentid=?");
             pst.setString(1, studentid);
 
             // Kiem tra id sinh vien co dung khong
@@ -421,13 +417,13 @@ public class Student extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy sinh viên với ID đã nhập!", "Thông báo", JOptionPane.WARNING_MESSAGE);
             }
             StudentData();
-        } catch (SQLException ex) {
-            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     private void textSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSearchKeyReleased
-        DefaultTableModel obj = (DefaultTableModel)tableStudent.getModel();
+        DefaultTableModel obj = (DefaultTableModel) tableStudent.getModel();
         TableRowSorter<DefaultTableModel> obj1 = new TableRowSorter<>(obj);
         tableStudent.setRowSorter(obj1);
         obj1.setRowFilter(RowFilter.regexFilter(textSearch.getText()));
@@ -457,7 +453,6 @@ public class Student extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Student().setVisible(true);
