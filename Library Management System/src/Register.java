@@ -90,7 +90,9 @@ public class Register extends javax.swing.JFrame {
 
         addressRe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        CreateRe.setBackground(new java.awt.Color(0, 153, 255));
         CreateRe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        CreateRe.setForeground(new java.awt.Color(255, 255, 255));
         CreateRe.setText("Create");
         CreateRe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

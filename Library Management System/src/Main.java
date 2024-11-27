@@ -60,7 +60,7 @@ public class Main extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        buttonStudent.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        buttonStudent.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         buttonStudent.setForeground(new java.awt.Color(0, 153, 255));
         buttonStudent.setText("Sinh viên");
         buttonStudent.addActionListener(new java.awt.event.ActionListener() {
@@ -69,7 +69,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        buttonBook.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        buttonBook.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         buttonBook.setForeground(new java.awt.Color(0, 153, 255));
         buttonBook.setText("Kho sách");
         buttonBook.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +78,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        buttonBorrow.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        buttonBorrow.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         buttonBorrow.setForeground(new java.awt.Color(0, 153, 255));
         buttonBorrow.setText("Danh sách mượn");
         buttonBorrow.addActionListener(new java.awt.event.ActionListener() {
@@ -87,7 +87,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        buttonLibrarian.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        buttonLibrarian.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         buttonLibrarian.setForeground(new java.awt.Color(0, 153, 255));
         buttonLibrarian.setText("Thủ thư");
         buttonLibrarian.addActionListener(new java.awt.event.ActionListener() {
@@ -96,7 +96,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        buttonLogout.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        buttonLogout.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         buttonLogout.setForeground(new java.awt.Color(0, 153, 255));
         buttonLogout.setText("Đăng xuất");
         buttonLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +105,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        buttonLibrarian1.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        buttonLibrarian1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         buttonLibrarian1.setForeground(new java.awt.Color(0, 153, 255));
         buttonLibrarian1.setText("Mượn sách");
         buttonLibrarian1.addActionListener(new java.awt.event.ActionListener() {
@@ -163,7 +163,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 629, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addContainerGap())))
         );
 
