@@ -462,20 +462,24 @@ public class Book extends javax.swing.JFrame {
 
     private void tableBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableBookMouseClicked
         int selectedRow = tableBook.getSelectedRow(); // Lấy hàng được chọn
-        DefaultTableModel DFG = (DefaultTableModel) tableBook.getModel();
-        String imagePath = DFG.getValueAt(selectedRow, 4).toString(); // Lấy dữ liệu từ cột image
+        if (selectedRow != -1) {
+            int modelRowIndex = tableBook.convertRowIndexToModel(selectedRow); // Chuyển từ view sang model
 
-        // Hiển thị hình ảnh
-        if (imagePath != null && !imagePath.isEmpty()) {
-            try {
-                ImageIcon bookImage = new ImageIcon(imagePath); // Tạo ImageIcon từ đường dẫn
-                Image scaledImage = bookImage.getImage().getScaledInstance(labelImage.getWidth(), labelImage.getHeight(), Image.SCALE_SMOOTH);
-                labelImage.setIcon(new ImageIcon(scaledImage)); // Đặt ảnh vào JLabel
-            } catch (Exception e) {
-                Logger.getLogger(Book.class.getName()).log(Level.SEVERE, null, e);
+            DefaultTableModel DFG = (DefaultTableModel) tableBook.getModel();
+            String imagePath = DFG.getValueAt(modelRowIndex, 4).toString(); // Lấy dữ liệu cột image từ model
+
+            // Hiển thị ảnh
+            if (imagePath != null && !imagePath.isEmpty()) {
+                try {
+                    ImageIcon bookImage = new ImageIcon(imagePath);
+                    Image scaledImage = bookImage.getImage().getScaledInstance(labelImage.getWidth(), labelImage.getHeight(), Image.SCALE_SMOOTH);
+                    labelImage.setIcon(new ImageIcon(scaledImage));
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Không thể hiển thị ảnh: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                labelImage.setIcon(null); // Xóa ảnh nếu không có đường dẫn
             }
-        } else {
-            labelImage.setIcon(null); // Xóa ảnh nếu không có đường dẫn
         }
     }//GEN-LAST:event_tableBookMouseClicked
 

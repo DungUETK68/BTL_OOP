@@ -25,7 +25,7 @@ public class Register extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         passwordRe = new javax.swing.JPasswordField();
         usernameRe = new javax.swing.JTextField();
-        studentCodeRe = new javax.swing.JTextField();
+        studentIDRe = new javax.swing.JTextField();
         addressRe = new javax.swing.JTextField();
         CreateRe = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -81,10 +81,10 @@ public class Register extends javax.swing.JFrame {
 
         usernameRe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        studentCodeRe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        studentCodeRe.addActionListener(new java.awt.event.ActionListener() {
+        studentIDRe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        studentIDRe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                studentCodeReActionPerformed(evt);
+                studentIDReActionPerformed(evt);
             }
         });
 
@@ -148,7 +148,7 @@ public class Register extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(passwordRe, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
                         .addComponent(usernameRe)
-                        .addComponent(studentCodeRe)
+                        .addComponent(studentIDRe)
                         .addComponent(addressRe)
                         .addComponent(nameRe)
                         .addComponent(emailRe)))
@@ -172,7 +172,7 @@ public class Register extends javax.swing.JFrame {
                     .addComponent(passwordRe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(studentCodeRe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(studentIDRe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -196,9 +196,9 @@ public class Register extends javax.swing.JFrame {
         // Nhap mat khau
     }//GEN-LAST:event_passwordReActionPerformed
 
-    private void studentCodeReActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentCodeReActionPerformed
+    private void studentIDReActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentIDReActionPerformed
         // Nhap ma sinh vien
-    }//GEN-LAST:event_studentCodeReActionPerformed
+    }//GEN-LAST:event_studentIDReActionPerformed
 
     // them tai khoan 
     private void CreateReActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateReActionPerformed
@@ -206,7 +206,7 @@ public class Register extends javax.swing.JFrame {
             String name = nameRe.getText();
             String username = usernameRe.getText();
             String password = passwordRe.getText();
-            String studentid = studentCodeRe.getText();
+            String studentid = studentIDRe.getText();
             String address = addressRe.getText();
             String email = emailRe.getText();
 
@@ -224,14 +224,12 @@ public class Register extends javax.swing.JFrame {
             con = DriverManager.getConnection("jdbc:mysql://localhost/library", "root", "");
 
             Statement stm = con.createStatement();
-            String sql = "SELECT * FROM student WHERE username='" + username + "'";
-            ResultSet rs = stm.executeQuery(sql);
+            String checkUsername = "SELECT * FROM student WHERE username='" + username + "'";
+            ResultSet rs = stm.executeQuery(checkUsername);
 
             if (rs.next()) {
-                //neu tai khoan va mat khau da ton tai 
-                JOptionPane.showMessageDialog(this, "Tải khoản đã tồn tại!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Username đã tồn tại!", "Thông báo", JOptionPane.WARNING_MESSAGE);
                 usernameRe.setText("");
-                passwordRe.setText("");
             } else {
                 //them tai khoan vao database
                 pst = con.prepareStatement("INSERT INTO student (studentid, studentname, email, address, username, password)VALUES(?, ?, ?, ?, ?, ?)");
@@ -309,7 +307,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField nameRe;
     private javax.swing.JPasswordField passwordRe;
-    private javax.swing.JTextField studentCodeRe;
+    private javax.swing.JTextField studentIDRe;
     private javax.swing.JTextField usernameRe;
     // End of variables declaration//GEN-END:variables
 }

@@ -168,7 +168,7 @@ public class Borrow extends javax.swing.JFrame {
         buttonInsert.setBackground(new java.awt.Color(0, 153, 255));
         buttonInsert.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         buttonInsert.setForeground(new java.awt.Color(255, 255, 255));
-        buttonInsert.setText("Insert");
+        buttonInsert.setText("Borrow");
         buttonInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonInsertActionPerformed(evt);
