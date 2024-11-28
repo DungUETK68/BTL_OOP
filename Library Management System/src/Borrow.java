@@ -415,7 +415,7 @@ public class Borrow extends javax.swing.JFrame {
             BorrowData();
 
             // Them sach vao danh sach khi tra sach
-            pst = con.prepareStatement("INSERT INTO book (bookid, bookname, author, publisher) SELECT bookid, bookname, author, publisher FROM history WHERE bookid=?");
+            pst = con.prepareStatement("INSERT INTO book (bookid, bookname, author, publisher, image) SELECT bookid, bookname, author, publisher, image FROM history WHERE bookid=?");
             pst.setString(1, bookid);
             pst.executeUpdate();
         } catch (SQLException e) {
