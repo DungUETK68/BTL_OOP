@@ -175,13 +175,13 @@ public class Book extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("Nhà xuất bản");
 
-        textBookID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textBookID.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        textBookName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textBookName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        textAuthor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textAuthor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        textPublisher.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textPublisher.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         buttonInsert.setBackground(new java.awt.Color(0, 153, 255));
         buttonInsert.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -474,8 +474,10 @@ public class Book extends javax.swing.JFrame {
             int modelRowIndex = tableBook.convertRowIndexToModel(selectedRow); // Chuyển từ view sang model
 
             DefaultTableModel DFG = (DefaultTableModel) tableBook.getModel();
+            String bookID = DFG.getValueAt(modelRowIndex, 0).toString(); // Lay gia tri bookid tu model
             String imagePath = DFG.getValueAt(modelRowIndex, 4).toString(); // Lấy dữ liệu cột image từ model
 
+            textBookID.setText(bookID);
             // Hiển thị ảnh
             if (imagePath != null && !imagePath.isEmpty()) {
                 try {

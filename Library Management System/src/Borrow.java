@@ -148,6 +148,11 @@ public class Borrow extends javax.swing.JFrame {
             }
         ));
         tableBorrow.setRowHeight(30);
+        tableBorrow.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableBorrowMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableBorrow);
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 255));
@@ -161,9 +166,9 @@ public class Borrow extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("Ngày mượn");
 
-        textBookID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textBookID.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        textStudentID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textStudentID.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         buttonInsert.setBackground(new java.awt.Color(0, 153, 255));
         buttonInsert.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -433,6 +438,18 @@ public class Borrow extends javax.swing.JFrame {
         tableBorrow.setRowSorter(obj1);
         obj1.setRowFilter(RowFilter.regexFilter(textSearch.getText()));
     }//GEN-LAST:event_textSearchKeyReleased
+
+    private void tableBorrowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableBorrowMouseClicked
+        int selectedRow = tableBorrow.getSelectedRow(); // Lấy hàng được chọn
+        if (selectedRow != -1) {
+            int modelRowIndex = tableBorrow.convertRowIndexToModel(selectedRow); // Chuyển từ view sang model
+
+            DefaultTableModel DFG = (DefaultTableModel) tableBorrow.getModel();
+            String bookID = DFG.getValueAt(modelRowIndex, 0).toString(); // Lay gia tri bookid tu model
+
+            textBookID.setText(bookID);
+        }
+    }//GEN-LAST:event_tableBorrowMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

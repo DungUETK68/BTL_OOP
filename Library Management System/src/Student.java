@@ -1,8 +1,10 @@
 
+import java.awt.Image;
 import java.sql.*;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -153,13 +155,13 @@ public class Student extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("Địa chỉ");
 
-        textStudentID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textStudentID.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        textStudentName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textStudentName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        textEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        textAddress.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textAddress.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         buttonInsert.setBackground(new java.awt.Color(0, 153, 255));
         buttonInsert.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -210,6 +212,11 @@ public class Student extends javax.swing.JFrame {
         tableStudent.setRowHeight(30);
         tableStudent.setSelectionForeground(new java.awt.Color(0, 0, 0));
         tableStudent.setShowGrid(false);
+        tableStudent.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableStudentMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableStudent);
 
         textSearch.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -428,6 +435,18 @@ public class Student extends javax.swing.JFrame {
         tableStudent.setRowSorter(obj1);
         obj1.setRowFilter(RowFilter.regexFilter(textSearch.getText()));
     }//GEN-LAST:event_textSearchKeyReleased
+
+    private void tableStudentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableStudentMouseClicked
+        int selectedRow = tableStudent.getSelectedRow(); // Lấy hàng được chọn
+        if (selectedRow != -1) {
+            int modelRowIndex = tableStudent.convertRowIndexToModel(selectedRow); // Chuyển từ view sang model
+
+            DefaultTableModel DFG = (DefaultTableModel) tableStudent.getModel();
+            String studentID = DFG.getValueAt(modelRowIndex, 0).toString(); // Lay gia tri studentid tu model
+
+            textStudentID.setText(studentID);
+        }
+    }//GEN-LAST:event_tableStudentMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

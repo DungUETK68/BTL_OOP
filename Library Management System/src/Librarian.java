@@ -149,6 +149,11 @@ public class Librarian extends javax.swing.JFrame {
             }
         ));
         tableLibrarian.setRowHeight(30);
+        tableLibrarian.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableLibrarianMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableLibrarian);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -163,18 +168,18 @@ public class Librarian extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("Địa chỉ");
 
-        textLibrarianID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textLibrarianID.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        textLibrarianName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textLibrarianName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         textLibrarianName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textLibrarianNameActionPerformed(evt);
             }
         });
 
-        textEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        textAddress.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textAddress.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         buttonInsert.setBackground(new java.awt.Color(0, 153, 255));
         buttonInsert.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -445,6 +450,18 @@ public class Librarian extends javax.swing.JFrame {
     private void textSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textSearchActionPerformed
+
+    private void tableLibrarianMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableLibrarianMouseClicked
+        int selectedRow = tableLibrarian.getSelectedRow(); // Lấy hàng được chọn
+        if (selectedRow != -1) {
+            int modelRowIndex = tableLibrarian.convertRowIndexToModel(selectedRow); // Chuyển từ view sang model
+
+            DefaultTableModel DFG = (DefaultTableModel) tableLibrarian.getModel();
+            String librarianID = DFG.getValueAt(modelRowIndex, 0).toString(); // Lay gia tri librarianid tu model
+
+            textLibrarianID.setText(librarianID);
+        }
+    }//GEN-LAST:event_tableLibrarianMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

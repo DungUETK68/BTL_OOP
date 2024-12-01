@@ -60,38 +60,38 @@ public class Register extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Tên đăng nhập:");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Mật khẩu:");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("Mã sinh viên:");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setText("Địa chỉ:");
 
-        passwordRe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        passwordRe.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         passwordRe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordReActionPerformed(evt);
             }
         });
 
-        usernameRe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        usernameRe.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        studentIDRe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        studentIDRe.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         studentIDRe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 studentIDReActionPerformed(evt);
             }
         });
 
-        addressRe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        addressRe.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         CreateRe.setBackground(new java.awt.Color(0, 153, 255));
-        CreateRe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        CreateRe.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         CreateRe.setForeground(new java.awt.Color(255, 255, 255));
         CreateRe.setText("Create");
         CreateRe.addActionListener(new java.awt.event.ActionListener() {
@@ -100,12 +100,12 @@ public class Register extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setText("Họ và tên:");
 
-        nameRe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        nameRe.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        CancelRe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        CancelRe.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         CancelRe.setText("Cancel");
         CancelRe.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -118,10 +118,10 @@ public class Register extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setText("Email:");
 
-        emailRe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        emailRe.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -129,7 +129,7 @@ public class Register extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel8)
                     .addComponent(jLabel7)
@@ -152,7 +152,7 @@ public class Register extends javax.swing.JFrame {
                         .addComponent(addressRe)
                         .addComponent(nameRe)
                         .addComponent(emailRe)))
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
