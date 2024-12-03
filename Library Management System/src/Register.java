@@ -220,7 +220,7 @@ public class Register extends javax.swing.JFrame {
                 return;
             }
 
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/library", "root", "");
 
             Statement stm = con.createStatement();

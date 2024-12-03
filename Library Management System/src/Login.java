@@ -170,7 +170,7 @@ public class Login extends javax.swing.JFrame {
         } else {
             isLibrarian = false;
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
                 con = DriverManager.getConnection("jdbc:mysql://localhost/library", "root", "");
 
                 Statement stm = con.createStatement();
