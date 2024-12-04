@@ -191,6 +191,10 @@ public class Register extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public void Connect() {
+        con = DatabaseConnection.getConnection();
+    }
+
 
     private void passwordReActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordReActionPerformed
         // Nhap mat khau
@@ -220,9 +224,6 @@ public class Register extends javax.swing.JFrame {
                 return;
             }
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/library", "root", "");
-
             Statement stm = con.createStatement();
             String checkUsername = "SELECT * FROM student WHERE username='" + username + "'";
             ResultSet rs = stm.executeQuery(checkUsername);
@@ -246,7 +247,7 @@ public class Register extends javax.swing.JFrame {
                 new Login().setVisible(true);
                 dispose();
             }
-            con.close();
+
         } catch (Exception e) {
             Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, e);
         }

@@ -20,12 +20,7 @@ public class Librarian extends javax.swing.JFrame {
     }
 
     public void Connect() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/library", "root", "");
-        } catch (ClassNotFoundException | SQLException e) {
-            Logger.getLogger(Librarian.class.getName()).log(Level.SEVERE, null, e);
-        }
+        con = DatabaseConnection.getConnection();
     }
 
     public void countLibrarians() {

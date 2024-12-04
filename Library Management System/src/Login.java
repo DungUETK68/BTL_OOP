@@ -150,6 +150,9 @@ public class Login extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+    public void Connect() {
+        con = DatabaseConnection.getConnection();
+    }
 
     private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
 
@@ -170,9 +173,6 @@ public class Login extends javax.swing.JFrame {
         } else {
             isLibrarian = false;
             try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                con = DriverManager.getConnection("jdbc:mysql://localhost/library", "root", "");
-
                 Statement stm = con.createStatement();
                 String sql = "select * from student where username='" + user + "' and password='" + pass + "'";
                 ResultSet rs = stm.executeQuery(sql);
@@ -187,7 +187,7 @@ public class Login extends javax.swing.JFrame {
                     password.setText("");
                 }
 
-                con.close();
+
             } catch (Exception e) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
             }
